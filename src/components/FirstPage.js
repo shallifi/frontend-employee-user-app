@@ -10,8 +10,8 @@ function FirstPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('First name: ${firstName}');
-    console.log('Last name: ${lastName}')
+    console.log(`First name: ${firstName}`);
+    console.log(`Last name: ${lastName}`)
   }
 
 
