@@ -11,15 +11,13 @@ function CalendarWidget() {
 
   return (
     
-    <div>Calendar
+    <div>Start Date
        
       <DatePicker
         selected={selectedDate}
         onChange={handleDateClick}
       />
-        
-        
-      
+                      
     </div>
 
   )
