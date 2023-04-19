@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from 'react';
+// import utilityFunctions from '../utilityFunctions';
 // import useForm from '../hooks/useForm';
 
 // import { json } from 'react-router-dom';
@@ -16,16 +17,22 @@ function FirstPage() {
   });
 
 
-
   const handleChange = (event) => {
     const {name, value} = event.target;
     console.log(name, value);
-    if (name === 'firstName') {
-      setFirstName(value);
-    } else if (name === 'lastName') {
-      setLastName(value);
-    }
+    setFirstName((firstName) => ({...firstName, [name]: value}));
+    setLastName((lastName) => ({...lastName, [name]: value}));
   }
+
+  // const handleChange = (event) => {
+  //   const {name, value} = event.target;
+  //   console.log(name, value);
+  //   if (name === 'firstName') {
+  //     setFirstName(value);
+  //   } else if (name === 'lastName') {
+  //     setLastName(value);
+  //   }
+  // }
 
 
   // const handleChange = (e) => {
@@ -65,18 +72,20 @@ function FirstPage() {
   return (
     <div className="App">
     <form onSubmit={handleSubmit}>
+      <h1>Employee Information</h1>
+      
+   
+
     <label>
         First name:
         <input type="text"
-        name="firstName" 
-        value={firstName} 
+        name="firstName"         
         onChange={handleChange} />
       </label>
       <label>
         Last name:
         <input type="text" 
-        name="lastName"
-        value={lastName}
+        name="lastName"        
         onChange={handleChange} />
       </label>
 
