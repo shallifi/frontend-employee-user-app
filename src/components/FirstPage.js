@@ -20,29 +20,18 @@ function FirstPage() {
   const handleChange = (event) => {
     const {name, value} = event.target;
     console.log(name, value);
-    setFirstName((firstName) => ({...firstName, [name]: value}));
-    setLastName((lastName) => ({...lastName, [name]: value}));
+    // setFirstName((firstName) => ({...firstName, [name]: value}));
+    // setLastName((lastName) => ({...lastName, [name]: value}));
+    if (name === 'first_name') {
+      setFirstName(value);
+    } else if (name === 'last_name') {
+      setLastName(value);
+    }
+
   }
 
-  // const handleChange = (event) => {
-  //   const {name, value} = event.target;
-  //   console.log(name, value);
-  //   if (name === 'firstName') {
-  //     setFirstName(value);
-  //   } else if (name === 'lastName') {
-  //     setLastName(value);
-  //   }
-  // }
 
-
-  // const handleChange = (e) => {
-  //   const {name, value} = e.target;
-  //   console.log(name, value);
-  //   setFirstName((firstName) => ({...firstName, [name]: value}));
-  //   setLastName((lastName) => ({...lastName, [name]: value}));
-  // }
-
-
+// how to submit the form data to the database?
 
 
 
@@ -52,8 +41,8 @@ function FirstPage() {
     event.preventDefault();
     // console.log(`First name: ${firstName}`);
     // console.log(`Last name: ${lastName}`);
-    const data = {firstName, lastName};
-    console.log(data);
+    const data = { first_name: firstName, last_name: lastName };
+    // console.log(data);
 
     fetch('http://localhost:3000/employees', {
       method: 'POST',
@@ -73,19 +62,17 @@ function FirstPage() {
     <div className="App">
     <form onSubmit={handleSubmit}>
       <h1>Employee Information</h1>
-      
-   
-
+    
     <label>
         First name:
         <input type="text"
-        name="firstName"         
+        name="first_name"        
         onChange={handleChange} />
       </label>
       <label>
         Last name:
         <input type="text" 
-        name="lastName"        
+        name="last_name"        
         onChange={handleChange} />
       </label>
 
