@@ -2,26 +2,33 @@ import './App.css';
 import ButtonTest from './components/ButtonTest';
 import CalendarWidget from './components/CalendarWidget';
 import FirstPage from './components/FirstPage';
-// import FirstPage from './FirstPage';
-// import {BrowserRouter, Route, Routes} from "react-router-dom";
-
+import SecondPage from './components/SecondPage';
+import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
+import { Switch } from 'react-router-dom';
 
 
 function App() {
   return (
     <div>
     <p>Place holder for the beginning</p>
-    <FirstPage/>
-    <ButtonTest/>
-    <CalendarWidget/>
+    
+    {/* <Routes>
+      <Route path="/" component={FirstPage} /> */}
+      {/* <Route path="/SecondPage" component={SecondPage} />
+    </Routes> */}
+    
+    {/* <FirstPage/> */}
+    {/* <SecondPage/> */}
+    {/* <ButtonTest/>
+    <CalendarWidget/> */}
+    
+      <p>Place holder for the beginning</p>
 
-    {/* <BrowserRouter>
-    <Routes>
-      <Route path="/firstpage" element={<FirstPage/>}/>
-      <Route path="/buttontest" element={<ButtonTest/>}/>
-        
-    </Routes>
-    </BrowserRouter> */}
+      <Routes>
+        <Route path="/" element={<FirstPage />} />
+        <Route path="/second-page" element={<SecondPage />} />
+      </Routes>
+    
     </div>
   );
     
