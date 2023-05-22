@@ -2,7 +2,8 @@ import React from 'react'
 import {useState, useHistory} from 'react';
 import { useNavigate } from 'react-router-dom';
 import CalendarWidget from './CalendarWidget';
-import ButtonTest from './ButtonTest';
+// import ButtonTest from './ButtonTest';
+import ButtonGroupTwo from './ButtonGroupTwo';
 // import utilityFunctions from '../utilityFunctions';
 // import useForm from '../hooks/useForm';
 
@@ -69,45 +70,22 @@ function FirstPage() {
         name="last_name"        
         onChange={handleChange} />
       </label>
-    <ButtonTest/>
+    {/* <ButtonTest/> */}
     <CalendarWidget/>
+    <ButtonGroupTwo/>
 
 
-{/* 
-        First Name:
-        <input type="text"
-          value={firstName}
-          onChange={event => setFirstName(event.target.value)}
-        /> */}
-        {/* Last Name:
-        <input type="text" 
-        value={lastName}
-        onChange={event => setLastName(event.target.value)}
-        /> */}
-        
+
         <div className='radiobutton'>
          
-          {/* New to SCC?
-         
-            <input type="radio" value="option1" checked={true} />
-            New to SCC/CBC project
-                      
-            <input type="radio" value="option2" />
-            Returning to SCC/CBC project
-                      
-            <input type="radio" value="option3" />
-            Not Applicable */}
+
           </div>
           
               
       <input type="submit" value="Submit" />
 </form>
 
-      
-        {/* <Route exact path="/FirstPage">
-            <FirstPage />
-        </Route>
-       */}
+
      </div>
   );
 
