@@ -1,22 +1,21 @@
-import React from 'react'
-import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import CalendarWidget from './CalendarWidget';
 // import ButtonTest from './ButtonTest';
-import ButtonGroupTwo from './ButtonGroupTwo';
 // import utilityFunctions from '../utilityFunctions';
 // import useForm from '../hooks/useForm';
-
-// import { json } from 'react-router-dom';
+// import Form from 'react-bootstrap/Form';
 // import Button from 'react-bootstrap/Button';
 // import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import React from 'react'
+import ButtonGroupTwo from './ButtonGroupTwo';
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import CalendarWidget from './CalendarWidget';
 
-function FirstPage() {
+function FirstPage({ setFormData}) {
   const [firstName, setFirstName] = useState ('');
   const [lastName, setLastName] = useState ('');
- const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  const [selectedOption, setSelectedOption] = useState('');
 
 
   const handleChange = (event) => {
@@ -29,7 +28,10 @@ function FirstPage() {
     }
 
   }
-
+// need to fix handleFormChange and handleSubmit, and then figure out how to get the radiobutton data to the database
+  const handleFormChange = (event) => {
+    setFormData(event.target.value);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -70,17 +72,10 @@ function FirstPage() {
         name="last_name"        
         onChange={handleChange} />
       </label>
-    {/* <ButtonTest/> */}
+      <br></br>
     <CalendarWidget/>
-    <ButtonGroupTwo/>
-
-
-
-        {/* <div className='radiobutton'>
-         
-
-          </div> */}
-          
+    <ButtonGroupTwo onChange={handleFormChange} selectedOption={selectedOption} setFormData={setSelectedOption} />
+    
               
       <input type="submit" value="Submit" />
 </form>

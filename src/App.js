@@ -12,7 +12,7 @@ function App() {
     <div>
     
       <p>Place holder for the beginning</p>
-
+    
       <Routes>
         <Route path="/" element={<FirstPage />} />
         <Route path="/second-page" element={<SecondPage />} />
