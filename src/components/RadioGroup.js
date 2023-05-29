@@ -1,30 +1,55 @@
 // import Form from 'react-bootstrap/Form';
+// import useForm from '../hooks/useForm';
 
 
 import React from 'react';
-// import useForm from '../hooks/useForm';
 
-function RadioGroup({ name, options, inline, handleRadioChange, selectedOption }) {
+function RadioGroup({ name, options, handleRadioChange, selectedOption }) {
   return (
-    <div className="mb-3">
+    <div>
       {options.map((option) => (
-        <div key={option.id} className="form-check form-check-inline">
+        <div key={option.id}>
           <input
-            className="form-check-input"
             type="radio"
             name={name}
             id={option.id}
-            value={option.id}
+            value={option.label}
             onChange={handleRadioChange}
-            checked={selectedOption === option.id}
+            checked={selectedOption === option.label}
           />
-          <label className="form-check-label" htmlFor={option.id}>
-            {option.label}
-          </label>
+          <label htmlFor={option.id}>{option.label}</label>
         </div>
       ))}
     </div>
   );
 }
+
+
+
+
+
+// function RadioGroup({ name, options, inline, handleRadioChange, selectedOption }) {
+//   return (
+//     <div className="mb-3">
+//       {options.map((option) => (
+//         <div key={option.id} className="form-check form-check-inline">
+//           <input
+//             className="form-check-input"
+//             type="radio"
+//             name={name}
+//             id={option.id}
+//             value={option.id}
+//             handleRadioChange={handleRadioChange}
+//             checked={selectedOption === option.id}
+//             selectedOption={selectedOption}
+//           />
+//           <label className="form-check-label" htmlFor={option.id}>
+//             {option.label}
+//           </label>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 export default RadioGroup;
 // how to get value of selected radio button? Also need to figure out the Form error
