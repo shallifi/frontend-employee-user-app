@@ -9,7 +9,7 @@ function FirstPage({ setFormData}) {
   const [firstName, setFirstName] = useState ('');
   const [lastName, setLastName] = useState ('');
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState({});
 
 
   const handleChange = (event) => {
@@ -22,10 +22,16 @@ function FirstPage({ setFormData}) {
     }
   }
 
-  const handleSelectedOptionChange = (value) => {
-    setSelectedOption(value);
-   
-  }
+const handleSelectedOptionChange = (value, groupName) => { // value is the value of the selected radio button
+  setSelectedOption((prevSelectedOption) => ({
+    ...prevSelectedOption,
+    [groupName]: value,
+  }));
+}; 
+
+  // const handleSelectedOptionChange = (value) => {
+  //   setSelectedOption(value);
+  //    }
 
   // const handleFormChange = (event) => {
   //   setFormData(event.target.value);
@@ -36,7 +42,11 @@ function FirstPage({ setFormData}) {
     const data = { 
       first_name: firstName,
       last_name: lastName,
-      new_to_scc: selectedOption };
+      new_to_scc: selectedOption ['group1'], 
+      driving_for_position: selectedOption ['group2'],
+      transporting_children: selectedOption ['group3'],
+      attending_preservice: selectedOption ['group4'],
+     };
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',

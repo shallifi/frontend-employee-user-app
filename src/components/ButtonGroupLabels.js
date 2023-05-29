@@ -3,20 +3,16 @@ import RadioGroup from './RadioGroup';
 
 
 function ButtonGroupLabels({ onSelectedOptionChange }) {
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState({});
     
 
     const handleRadioChange = (event, groupName) => {
         // console.log('handleRadioChange', event.target.value, groupName);
         setSelectedOption((prevSelectedOption) => ({ // this is the value of the selected radio button
             ...prevSelectedOption, 
-            [groupName]: event.target.value,  // this is the value of the selected radio button
+            [groupName]: event.target.value,  
         }));
-        // console.log('selectedOption', selectedOption); // this is the value of the selected radio button
-        // console.log('event.target.value', event.target.value); // this is the value of the selected radio button
-        // console.log('groupName', groupName); // this is the value of the selected radio button
-        // console.log('selectedOption[groupName]', selectedOption[groupName]); // this is the value of the selected radio button
-        
+        onSelectedOptionChange(event.target.value, groupName);       
         };
         
 
@@ -36,10 +32,10 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
           { id: 'inline-radio-9', label: 'Not Applicable' },
           ];
     const group4Options = [
-          { id: 'inline-radio-1', label: 'Yes' },
-          { id: 'inline-radio-2', label: 'Already has Certificate' },
-          { id: 'inline-radio-3', label: 'Needs Waiver Test' },
-          { id: 'inline-radio-4', label: 'Not Applicable' },
+          { id: 'inline-radio-10', label: 'Yes' },
+          { id: 'inline-radio-12', label: 'Already has Certificate' },
+          { id: 'inline-radio-13', label: 'Needs Waiver Test' },
+          { id: 'inline-radio-14', label: 'Not Applicable' },
           ];    
     
   return (
@@ -49,10 +45,8 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
         name="group1"
         options={group1Options}
         inline
-        // handleRadioChange={handleRadioChange}
-        // selectedOption={selectedOption}
         handleRadioChange={(event) => handleRadioChange(event, 'group1')}
-        selectedOption={selectedOption.group1}
+        selectedOption={selectedOption['group1']}
     />
     <h5>Question for SCC employees only - driving for position?</h5>
     <RadioGroup
@@ -60,7 +54,7 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
         options={group2Options}
         inline
         handleRadioChange={(event) => handleRadioChange(event, 'group2')}
-        selectedOption={selectedOption.group2}
+        selectedOption={selectedOption['group2']}
     />
     <h5>Will employee be transporting children?</h5>
     <RadioGroup
@@ -68,7 +62,7 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
         options={group3Options}
         inline
         handleRadioChange={(event) => handleRadioChange(event, 'group3')}
-        selectedOption={selectedOption.group3}
+        selectedOption={selectedOption['group3']}
     />
     <h5>Attending PreService?</h5>
     <RadioGroup
@@ -76,7 +70,7 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
         options={group4Options}
         inline
         handleRadioChange={(event) => handleRadioChange(event, 'group4')} // this is the value of the selected radio button
-        selectedOption={selectedOption.group4} // this is the value of the selected radio button
+        selectedOption={selectedOption['group4']} // this is the value of the selected radio button
     />
     </div>
   )
