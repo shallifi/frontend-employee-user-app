@@ -1,10 +1,4 @@
-// import ButtonTest from './ButtonTest';
-// import utilityFunctions from '../utilityFunctions';
-// import useForm from '../hooks/useForm';
-// import Form from 'react-bootstrap/Form';
-// import Button from 'react-bootstrap/Button';
-// import ButtonGroup from 'react-bootstrap/ButtonGroup';
-// import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+
 import React from 'react'
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +27,6 @@ function FirstPage({ setFormData}) {
    
   }
 
-// need to fix handleFormChange and handleSubmit, and then figure out how to get the radiobutton data to the database
   // const handleFormChange = (event) => {
   //   setFormData(event.target.value);
   // };
@@ -83,7 +76,7 @@ function FirstPage({ setFormData}) {
       <br></br>
     <CalendarWidget/>
     {/* <ButtonGroupTwo onChange={handleFormChange} selectedOption={selectedOption} setFormData={setSelectedOption} /> */}
-    <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} />
+    <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
               
       <input type="submit" value="Submit" />
 </form>
