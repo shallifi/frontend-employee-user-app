@@ -42,10 +42,10 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
     const data = { 
       first_name: firstName,
       last_name: lastName,
-      new_to_scc: selectedOption ['group1'], 
-      driving_for_position: selectedOption ['group2'],
-      transporting_children: selectedOption ['group3'],
-      attending_preservice: selectedOption ['group4'],
+      new_to_scc: selectedOption['group1'], 
+      driving_for_position: selectedOption['group2'],
+      transporting_children: selectedOption['group3'],
+      attending_preservice: selectedOption['group4'],
      };
    
     fetch('http://localhost:3000/employees', {

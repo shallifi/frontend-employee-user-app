@@ -16,6 +16,12 @@ function CalendarWidget() {
       <DatePicker
         selected={selectedDate}
         onChange={handleDateClick}
+        dateFormat='MM/dd/yyyy'
+        minDate={new Date()} // disable past dates
+        filterDate={date => date.getDay() !== 6 && date.getDay() !== 0} // disable weekends
+        isClearable // clear date need to fix formating
+        showYearDropdown
+        scrollableMonthYearDropdown
       />
                       
     </div>
