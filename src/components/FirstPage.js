@@ -4,30 +4,50 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import CalendarWidget from './CalendarWidget';
 import ButtonGroupLabels from './ButtonGroupLabels';
+import useForm from '../hooks/useForm';
 
-function FirstPage({ setFormData}) {
+function FirstPage({ selectedDate}) {
   const [firstName, setFirstName] = useState ('');
   const [lastName, setLastName] = useState ('');
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState({});
+const { formData, handleChange } = useForm({
+  date: null,
+});
 
 
-  const handleChange = (event) => {
+
+/////////////////////////////////////////////////////////////////////////////////////
+  // handles the text input fields /////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////
+  const handleNameChange = (event) => {
     const {name, value} = event.target;
-    console.log(name, value);
     if (name === 'first_name') {
       setFirstName(value);
     } else if (name === 'last_name') {
       setLastName(value);
     }
   }
-
+/////////////////////////////////////////////////////////////////////////////////////
+  // handles the radio button group /////////////////////////////////////////////
 const handleSelectedOptionChange = (value, groupName) => { // value is the value of the selected radio button
   setSelectedOption((prevSelectedOption) => ({
     ...prevSelectedOption,
     [groupName]: value,
   }));
 }; 
+/////////////////////////////////////////////////////////////////////////////////////
+const handleCalendarChange = (date) => {
+  handleChange({
+    target: {
+      name: 'date',
+      value: date,
+  },
+  });
+};
+
+
+
 
   // const handleSelectedOptionChange = (value) => {
   //   setSelectedOption(value);
@@ -46,6 +66,7 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
       driving_for_position: selectedOption['group2'],
       transporting_children: selectedOption['group3'],
       attending_preservice: selectedOption['group4'],
+      start_date: formData.date,
      };
    
     fetch('http://localhost:3000/employees', {
@@ -75,16 +96,16 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
         First name:
         <input type="text"
         name="first_name"        
-        onChange={handleChange} />
+        onChange={handleNameChange} />
       </label>
       <label>
         Last name:
         <input type="text" 
         name="last_name"        
-        onChange={handleChange} />
+        onChange={handleNameChange} />
       </label>
       <br></br>
-    <CalendarWidget/>
+    <CalendarWidget onDateChange={handleCalendarChange} />
     {/* <ButtonGroupTwo onChange={handleFormChange} selectedOption={selectedOption} setFormData={setSelectedOption} /> */}
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
               

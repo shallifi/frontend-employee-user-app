@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 
 
-function CalendarWidget() {
+function CalendarWidget({ onDateChange}) {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateClick = (e) => {
       setSelectedDate(e);
+      onDateChange(e);
     }
 
   return (
