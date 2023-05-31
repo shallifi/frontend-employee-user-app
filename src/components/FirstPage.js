@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import CalendarWidget from './CalendarWidget';
 import ButtonGroupLabels from './ButtonGroupLabels';
 import useForm from '../hooks/useForm';
+import DropDownGroup from './DropDownGroup';
+// import Select from 'react-select';
 
 function FirstPage({ selectedDate}) {
   const [firstName, setFirstName] = useState ('');
@@ -105,12 +107,16 @@ const handleCalendarChange = (date) => {
         onChange={handleNameChange} />
       </label>
       <br></br>
+      <br></br>
+    <DropDownGroup />
+      <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
+    <br></br>
     {/* <ButtonGroupTwo onChange={handleFormChange} selectedOption={selectedOption} setFormData={setSelectedOption} /> */}
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
               
       <input type="submit" value="Submit" />
-</form>
+    </form>
 
 
      </div>
