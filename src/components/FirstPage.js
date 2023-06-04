@@ -13,6 +13,7 @@ function FirstPage({ selectedDate}) {
   const [lastName, setLastName] = useState ('');
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState({});
+  // const [selectedAgency, setSelectedAgency] = useState(null);
 const { formData, handleChange } = useForm({
   date: null,
 });
@@ -69,6 +70,7 @@ const handleCalendarChange = (date) => {
       transporting_children: selectedOption['group3'],
       attending_preservice: selectedOption['group4'],
       start_date: formData.date,
+      agency_id: agency.id
      };
    
     fetch('http://localhost:3000/employees', {
