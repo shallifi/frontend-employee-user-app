@@ -13,7 +13,7 @@ function FirstPage({ selectedDate}) {
   const [lastName, setLastName] = useState ('');
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState({});
-  // const [selectedAgency, setSelectedAgency] = useState(null);
+  const [selectedAgency, setSelectedAgency] = useState(null);
 const { formData, handleChange } = useForm({
   date: null,
 });
@@ -48,17 +48,14 @@ const handleCalendarChange = (date) => {
   },
   });
 };
+/////////////////////////////////////////////////////////////////////////////////////
+const handleDropDownChange = (selectedDropDownOption) => {
+  console.log(`handleDropDownChange`, selectedDropDownOption);
+  setSelectedAgency(selectedDropDownOption);
+};
 
 
 
-
-  // const handleSelectedOptionChange = (value) => {
-  //   setSelectedOption(value);
-  //    }
-
-  // const handleFormChange = (event) => {
-  //   setFormData(event.target.value);
-  // };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -70,7 +67,7 @@ const handleCalendarChange = (date) => {
       transporting_children: selectedOption['group3'],
       attending_preservice: selectedOption['group4'],
       start_date: formData.date,
-      agency_id: agency.id
+      agency_id: selectedAgency ? selectedAgency.value : null,
      };
    
     fetch('http://localhost:3000/employees', {
@@ -110,11 +107,10 @@ const handleCalendarChange = (date) => {
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup />
+    <DropDownGroup onSelectedAgencyChange={(selectedDropDownOption) => setSelectedAgency(selectedDropDownOption.value)} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
-    {/* <ButtonGroupTwo onChange={handleFormChange} selectedOption={selectedOption} setFormData={setSelectedOption} /> */}
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
               
       <input type="submit" value="Submit" />

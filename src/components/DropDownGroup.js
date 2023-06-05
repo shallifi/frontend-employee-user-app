@@ -1,5 +1,5 @@
-import React from 'react'
 // import Select from 'react-select';
+import React from 'react'
 import AsyncSelect from 'react-select/async';
 import { useState } from 'react';
 
@@ -14,18 +14,28 @@ function DropDownGroup() {
             const options = json.map((agency) => ({
                 value: agency.id,
                 label: agency.agency_name,
-            }));
-            
+            })
+            );
+               
             callback(options);
+            console.log(`loadA`, options);
         } catch (error) {
             console.error('Error fetching agency options:', error);
         }
     };
     
-    const handleChange = (selectedOption) => {
-        console.log(`handleChange`, selectedOption); 
+    // const handleDropDownChange = (selectedDropDownOption) => {
+    //     console.log(`handleDropDownChange`, selectedDropDownOption); 
         
-    };
+    // };
+    // const loadOptions = (searchValue, callback) => {
+    //     setTimeout(() => {
+    //         const filteredOptions = selectedAgency.filter((o) => o.label.includes(searchValue));
+    //         console.log(`loadOptions`, searchValue,filteredOptions);
+    //         callback(filteredOptions);
+    //     }, 2000);
+    //     };
+
     // const options = [
         //     { value: 'scc', label: 'SCC - Safe Children Coalition' },
         //     { value: 'flc', label: 'FLC - The Florida Center' },
@@ -61,10 +71,11 @@ function DropDownGroup() {
         cacheOptions
         defaultOptions
         loadOptions={loadAgencyOptions}
-        onChange={(option) => setSelectedAgency(option)}
+        onChange={(option) =>{ console.log(option); setSelectedAgency(option)}}
         value={selectedAgency}
+        isClearable
         />
-    {/* <AsyncSelect loadOptions={loadOptions} onChange={handleChange}/> */}
+    {/* <AsyncSelect loadAgencyOptions={loadAgencyOptions} onChange={handleDropDownChange}/> */}
       </div>
   )
 }
