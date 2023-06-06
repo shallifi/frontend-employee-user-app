@@ -1,10 +1,11 @@
-// import Select from 'react-select';
 import React from 'react'
 import AsyncSelect from 'react-select/async';
-import { useState } from 'react';
 
-function DropDownGroup() {
-    const [selectedAgency, setSelectedAgency] = useState(null);
+
+function DropDownGroup({onSelectedAgencyChange}) {
+   
+
+    // this is the function that is called when the user types in the search box
     const loadAgencyOptions = async (inputValue, callback) => {
         console.log(`loadAgencyOptions`, inputValue);
         try{
@@ -24,58 +25,24 @@ function DropDownGroup() {
         }
     };
     
-    // const handleDropDownChange = (selectedDropDownOption) => {
-    //     console.log(`handleDropDownChange`, selectedDropDownOption); 
-        
-    // };
-    // const loadOptions = (searchValue, callback) => {
-    //     setTimeout(() => {
-    //         const filteredOptions = selectedAgency.filter((o) => o.label.includes(searchValue));
-    //         console.log(`loadOptions`, searchValue,filteredOptions);
-    //         callback(filteredOptions);
-    //     }, 2000);
-    //     };
-
-    // const options = [
-        //     { value: 'scc', label: 'SCC - Safe Children Coalition' },
-        //     { value: 'flc', label: 'FLC - The Florida Center' },
-        //     { value: 'lsf', label: 'LSF - Lutheran Services Florida' },
-        //     { value: 'other', label: 'Other' }
-        //     ];
-    
-    // const loadAgencyOptions = async (inputValue, callback) => {
-    //     try {
-    //         const response = await fetch('http://localhost:3000/agency?search=' + inputValue);
-    //         const data = await response.json();
-        
-    //         const options = data.map((agency) => ({
-    //         value: agency.id,
-    //         label: agency.name,
-    //         }));
-        
-    //         callback(options);
-    //     } catch (error) {
-    //         console.error('Error fetching agency options:', error);
-    //     }
-      
-          
-        
+// this is the function that is called when the user selects an option
+    const handleAgencyChange = (selectedOption) => {
+        onSelectedAgencyChange(selectedOption); // Pass the selected agency object
+      };  
 
 
   return (
     <div>DropDownGroup Section
         <br></br>
         <h5>Agency</h5>
-    {/* <Select options={options} onChange={handleChange}/> */}
+   
     <AsyncSelect
         cacheOptions
         defaultOptions
         loadOptions={loadAgencyOptions}
-        onChange={(option) =>{ console.log(option); setSelectedAgency(option)}}
-        value={selectedAgency}
+        onChange={handleAgencyChange}
         isClearable
         />
-    {/* <AsyncSelect loadAgencyOptions={loadAgencyOptions} onChange={handleDropDownChange}/> */}
       </div>
   )
 }

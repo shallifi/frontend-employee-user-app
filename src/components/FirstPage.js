@@ -40,6 +40,7 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
   }));
 }; 
 /////////////////////////////////////////////////////////////////////////////////////
+  // handles the calendar widget /////////////////////////////////////////////
 const handleCalendarChange = (date) => {
   handleChange({
     target: {
@@ -49,9 +50,10 @@ const handleCalendarChange = (date) => {
   });
 };
 /////////////////////////////////////////////////////////////////////////////////////
-const handleDropDownChange = (selectedDropDownOption) => {
-  console.log(`handleDropDownChange`, selectedDropDownOption);
-  setSelectedAgency(selectedDropDownOption);
+  // handles the drop down group /////////////////////////////////////////////
+const handleDropDownChange = (selectedAgency) => {
+  console.log(`handleDropDownChange`, selectedAgency);
+  setSelectedAgency(selectedAgency);
 };
 
 
@@ -68,6 +70,7 @@ const handleDropDownChange = (selectedDropDownOption) => {
       attending_preservice: selectedOption['group4'],
       start_date: formData.date,
       agency_id: selectedAgency ? selectedAgency.value : null,
+
      };
    
     fetch('http://localhost:3000/employees', {
@@ -80,6 +83,7 @@ const handleDropDownChange = (selectedDropDownOption) => {
     .then(data => { console.log('Success:', data); 
     setFirstName('');
     setLastName('');
+    setSelectedAgency(null);
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -107,7 +111,7 @@ const handleDropDownChange = (selectedDropDownOption) => {
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup onSelectedAgencyChange={(selectedDropDownOption) => setSelectedAgency(selectedDropDownOption.value)} />
+    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
