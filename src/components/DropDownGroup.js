@@ -1,22 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import AsyncSelect from 'react-select/async';
 
 
+
 function DropDownGroup({onSelectedAgencyChange}) {
-   
+   const [defaultOptions, setDefaultOptions] = useState([]);
 
     // this is the function that is called when the user types in the search box
-    const loadAgencyOptions = async (inputValue, callback) => {
-        console.log(`loadAgencyOptions`, inputValue);
+    const loadAgencyOptions = async (searchValue, callback) => {
+        // console.log(`loadAgencyOptions`, searchValue);
         try{
-            const response = await fetch(`http://localhost:3000/agency/index`);
+   
+            const response = await fetch(`http://localhost:3000/agencies`);
             const json = await response.json();
             
-            const options = json.map((agency) => ({
+            let options = json.map((agency) => ({
                 value: agency.id,
                 label: agency.agency_name,
             })
             );
+
+            if (searchValue) {
+                // const searchRegex = new RegExp(searchValue, 'i');
+                options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            }
                
             callback(options);
             console.log(`loadA`, options);
@@ -30,6 +37,13 @@ function DropDownGroup({onSelectedAgencyChange}) {
         onSelectedAgencyChange(selectedOption); // Pass the selected agency object
       };  
 
+    //   this is the function that is called before the user types in the search box, to show the default options
+      useEffect(() => {
+            loadAgencyOptions('', (options) => {
+            setDefaultOptions(options);
+        });
+        }, []);
+
 
   return (
     <div>DropDownGroup Section
@@ -38,7 +52,7 @@ function DropDownGroup({onSelectedAgencyChange}) {
    
     <AsyncSelect
         cacheOptions
-        defaultOptions
+        defaultOptions={defaultOptions} 
         loadOptions={loadAgencyOptions}
         onChange={handleAgencyChange}
         isClearable
