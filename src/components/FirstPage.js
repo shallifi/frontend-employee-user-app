@@ -14,6 +14,7 @@ function FirstPage({ selectedDate}) {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState({});
   const [selectedAgency, setSelectedAgency] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
 const { formData, handleChange } = useForm({
   date: null,
 });
@@ -55,7 +56,10 @@ const handleDropDownChange = (selectedAgency) => {
   console.log(`handleDropDownChange`, selectedAgency);
   setSelectedAgency(selectedAgency);
 };
-
+const handleDepartmentChange = (selectedDepartment) => {
+  console.log(`handleDepartmentChange`, selectedDepartment);
+  setSelectedDepartment(selectedDepartment);
+};
 
 
 
@@ -111,7 +115,7 @@ const handleDropDownChange = (selectedAgency) => {
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} />
+    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>

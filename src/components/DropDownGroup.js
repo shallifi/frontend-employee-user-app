@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async';
 
 
 
-function DropDownGroup({onSelectedAgencyChange}) {
+function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
    const [defaultOptions, setDefaultOptions] = useState([]);
 
     // this is the function that is called when the user types in the search box
@@ -57,6 +57,13 @@ function DropDownGroup({onSelectedAgencyChange}) {
         onChange={handleAgencyChange}
         isClearable
         />
+        <br/>
+        <h5>Department</h5>
+    <AsyncSelect
+        cacheOptions
+
+
+    />
       </div>
   )
 }
