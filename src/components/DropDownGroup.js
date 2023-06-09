@@ -4,7 +4,8 @@ import AsyncSelect from 'react-select/async';
 
 
 function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
-   const [defaultOptions, setDefaultOptions] = useState([]);
+   const [agencyOptions, setAgencyOptions] = useState([]);
+   const [departmentOptions, setDepartmentOptions] = useState([]);
 
     // this is the function that is called when the user types in the search box
     const loadAgencyOptions = async (searchValue, callback) => {
@@ -32,15 +33,49 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         }
     };
     
+    // this is the function that is called when the user types in the department box
+    const loadDepartmentOptions = async (searchValue, callback) => {
+        console.log('loadDepartmentOptions', searchValue);
+        try{
+            const response = await fetch(`http://localhost:3000/departments`);
+            const json = await response.json();
+
+            let options = json.map((department) => ({
+                value: department.id,
+                label: department.department_name,
+            })
+            );
+
+            if (searchValue) {
+                // const searchRegex = new RegExp(searchValue, 'i');
+                options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            }
+            
+            callback(options);
+            console.log(`loadD`, options);
+        } catch (error) {
+            console.error('Error fetching department options:', error);
+        }
+    };
+
+
 // this is the function that is called when the user selects an option
     const handleAgencyChange = (selectedOption) => {
         onSelectedAgencyChange(selectedOption); // Pass the selected agency object
       };  
+      
+        const handleDepartmentChange = (selectedOption) => {
+        onSelectedDepartmentChange(selectedOption); // Pass the selected department object
+        };
 
     //   this is the function that is called before the user types in the search box, to show the default options
       useEffect(() => {
             loadAgencyOptions('', (options) => {
-            setDefaultOptions(options);
+                setAgencyOptions(options);
+        });
+
+        loadDepartmentOptions('', (options) => {
+            setDepartmentOptions(options);
         });
         }, []);
 
@@ -52,7 +87,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
    
     <AsyncSelect
         cacheOptions
-        defaultOptions={defaultOptions} 
+        defaultOptions={agencyOptions} 
         loadOptions={loadAgencyOptions}
         onChange={handleAgencyChange}
         isClearable
@@ -61,8 +96,10 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         <h5>Department</h5>
     <AsyncSelect
         cacheOptions
-
-
+        defaultOptions={departmentOptions}
+        loadOptions={loadDepartmentOptions}
+        onChange={handleDepartmentChange}
+        isClearable
     />
       </div>
   )

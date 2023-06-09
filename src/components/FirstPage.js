@@ -56,6 +56,8 @@ const handleDropDownChange = (selectedAgency) => {
   console.log(`handleDropDownChange`, selectedAgency);
   setSelectedAgency(selectedAgency);
 };
+/////////////////////////////////////////////////////////////////////////////////////
+  // handles the department in drop down group /////////////////////////////////////////////
 const handleDepartmentChange = (selectedDepartment) => {
   console.log(`handleDepartmentChange`, selectedDepartment);
   setSelectedDepartment(selectedDepartment);
