@@ -76,6 +76,7 @@ const handleDepartmentChange = (selectedDepartment) => {
       attending_preservice: selectedOption['group4'],
       start_date: formData.date,
       agency_id: selectedAgency ? selectedAgency.value : null,
+      department_id: selectedDepartment ? selectedDepartment.value : null,
 
      };
    
@@ -90,6 +91,7 @@ const handleDepartmentChange = (selectedDepartment) => {
     setFirstName('');
     setLastName('');
     setSelectedAgency(null);
+    setSelectedDepartment(null);
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
