@@ -36,9 +36,17 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
     
     // this is the function that is called when the user types in the department box
     const loadDepartmentOptions = async (searchValue, callback) => {
+        if (!selectedAgency) {
+            callback([]);
+            return;
+        }
         console.log('loadDepartmentOptions', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/departments`);
+            // const response = await fetch(`http://localhost:3000/depart/${selectedAgency.value}/departments`);
+            // const response = await fetch(
+            //     `http://localhost:3000/agencies/${selectedAgency.value}/departments`
+            //   );
             const json = await response.json();
 
             let options = json.map((department) => ({
@@ -48,7 +56,6 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
             );
 
             if (searchValue) {
-                // const searchRegex = new RegExp(searchValue, 'i');
                 options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
             }
             
@@ -66,9 +73,9 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         onSelectedAgencyChange(selectedOption); // Pass the selected agency object
     };  
       
-        const handleDepartmentChange = (selectedOption) => {
-        onSelectedDepartmentChange(selectedOption); // Pass the selected department object
-        };
+    const handleDepartmentChange = (selectedOption) => {
+    onSelectedDepartmentChange(selectedOption); // Pass the selected department object
+    };
 
     //   this is the function that is called before the user types in the search box, to show the default options
       useEffect(() => {
@@ -92,6 +99,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         defaultOptions={agencyOptions} 
         loadOptions={loadAgencyOptions}
         onChange={handleAgencyChange}
+        value={selectedAgency} // Set the selected agency
         isClearable
         />
         <br/>
@@ -101,6 +109,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         defaultOptions={departmentOptions}
         loadOptions={loadDepartmentOptions}
         onChange={handleDepartmentChange}
+        
         isClearable
         isDisabled={!selectedAgency} // Disable the department dropdown until an agency is selected
     />
