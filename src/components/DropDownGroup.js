@@ -6,6 +6,7 @@ import AsyncSelect from 'react-select/async';
 function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
    const [agencyOptions, setAgencyOptions] = useState([]);
    const [departmentOptions, setDepartmentOptions] = useState([]);
+   const [selectedAgency, setSelectedAgency] = useState(null);
 
     // this is the function that is called when the user types in the search box
     const loadAgencyOptions = async (searchValue, callback) => {
@@ -61,8 +62,9 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
 
 // this is the function that is called when the user selects an option
     const handleAgencyChange = (selectedOption) => {
+        setSelectedAgency(selectedOption);
         onSelectedAgencyChange(selectedOption); // Pass the selected agency object
-      };  
+    };  
       
         const handleDepartmentChange = (selectedOption) => {
         onSelectedDepartmentChange(selectedOption); // Pass the selected department object
@@ -100,6 +102,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         loadOptions={loadDepartmentOptions}
         onChange={handleDepartmentChange}
         isClearable
+        isDisabled={!selectedAgency} // Disable the department dropdown until an agency is selected
     />
       </div>
   )
