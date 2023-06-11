@@ -86,6 +86,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
     }, []);
 
         //  this is the function that is called before the user types in the department box, to show the default options
+
         useEffect(() => {
             if (!selectedAgency) {
                 return;
@@ -93,6 +94,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
             loadDepartmentOptions('', (options) => {
                 setDepartmentOptions(options);
             });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [selectedAgency]);
 
 
