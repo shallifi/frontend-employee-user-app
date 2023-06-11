@@ -42,11 +42,10 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
         }
         console.log('loadDepartmentOptions', searchValue);
         try{
-            const response = await fetch(`http://localhost:3000/departments`);
-            // const response = await fetch(`http://localhost:3000/depart/${selectedAgency.value}/departments`);
-            // const response = await fetch(
-            //     `http://localhost:3000/agencies/${selectedAgency.value}/departments`
-            //   );
+        //    loaded only when an agency is selected and only the departments for that agency are loaded
+            const response = await fetch(
+                `http://localhost:3000/departments/agency/${selectedAgency.value}`
+              );
             const json = await response.json();
 
             let options = json.map((department) => ({
@@ -83,10 +82,18 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange}) {
                 setAgencyOptions(options);
         });
 
-        loadDepartmentOptions('', (options) => {
-            setDepartmentOptions(options);
-        });
-        }, []);
+     
+    }, []);
+
+        //  this is the function that is called before the user types in the department box, to show the default options
+        useEffect(() => {
+            if (!selectedAgency) {
+                return;
+            }
+            loadDepartmentOptions('', (options) => {
+                setDepartmentOptions(options);
+            });
+        }, [selectedAgency]);
 
 
   return (
