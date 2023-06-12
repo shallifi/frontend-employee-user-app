@@ -15,7 +15,7 @@ function FirstPage({ selectedDate}) {
   const [selectedOption, setSelectedOption] = useState({});
   const [selectedAgency, setSelectedAgency] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
-const { formData, handleChange } = useForm({
+  const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
 
@@ -63,8 +63,17 @@ const handleDepartmentChange = (selectedDepartment) => {
   setSelectedDepartment(selectedDepartment);
 };
 
+/////////////////////////////////////////////////////////////////////////////////////
+const handleOfficeChange = (formData) => {
+  console.log(`handleOfficeChange`, formData);
+  setFormData(formData);
+};
 
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+  // handles the submit button /////////////////////////////////////////////
   function handleSubmit(event) {
     event.preventDefault();
     const data = { 
@@ -77,6 +86,7 @@ const handleDepartmentChange = (selectedDepartment) => {
       start_date: formData.date,
       agency_id: selectedAgency ? selectedAgency.value : null,
       department_id: selectedDepartment ? selectedDepartment.value : null,
+      office_id: formData ? formData.value : null,
 
      };
    
@@ -92,6 +102,7 @@ const handleDepartmentChange = (selectedDepartment) => {
     setLastName('');
     setSelectedAgency(null);
     setSelectedDepartment(null);
+    setFormData(null);
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -119,7 +130,7 @@ const handleDepartmentChange = (selectedDepartment) => {
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} />
+    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
