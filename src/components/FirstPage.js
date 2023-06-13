@@ -6,7 +6,8 @@ import CalendarWidget from './CalendarWidget';
 import ButtonGroupLabels from './ButtonGroupLabels';
 import useForm from '../hooks/useForm';
 import DropDownGroup from './DropDownGroup';
-// import Select from 'react-select';
+import InputFieldGroup from './InputFieldGroup';
+
 
 function FirstPage({ selectedDate}) {
   const [firstName, setFirstName] = useState ('');
@@ -18,8 +19,7 @@ function FirstPage({ selectedDate}) {
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
-
-
+  const {extension, setExtension} = useState('');
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -32,6 +32,17 @@ function FirstPage({ selectedDate}) {
       setLastName(value);
     }
   }
+
+  const handleExtensionChange = (event) => {
+    const { value} = event.target;
+    if (value === "" || /^\d+$/.test(value)) {
+      if (value.length <= 4) {
+        setExtension(value);
+      }
+    }
+  };
+
+
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the radio button group /////////////////////////////////////////////
 const handleSelectedOptionChange = (value, groupName) => { // value is the value of the selected radio button
@@ -40,6 +51,9 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
     [groupName]: value,
   }));
 }; 
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
 const handleCalendarChange = (date) => {
@@ -64,6 +78,7 @@ const handleDepartmentChange = (selectedDepartment) => {
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
+  // handles the office in drop down group ///////////////////////////////////
 const handleOfficeChange = (formData) => {
   console.log(`handleOfficeChange`, formData);
   setFormData(formData);
@@ -87,6 +102,7 @@ const handleOfficeChange = (formData) => {
       agency_id: selectedAgency ? selectedAgency.value : null,
       department_id: selectedDepartment ? selectedDepartment.value : null,
       office_id: formData ? formData.value : null,
+      extension: extension,
 
      };
    
@@ -103,6 +119,7 @@ const handleOfficeChange = (formData) => {
     setSelectedAgency(null);
     setSelectedDepartment(null);
     setFormData(null);
+    setExtension('');
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -135,8 +152,10 @@ const handleOfficeChange = (formData) => {
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
-              
+    <br/>
+    <InputFieldGroup onSelectedExtensionChange={handleExtensionChange} extension={extension}/>
       <input type="submit" value="Submit" />
+      <br/>
     </form>
 
 
