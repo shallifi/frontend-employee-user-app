@@ -19,7 +19,7 @@ function FirstPage({ selectedDate}) {
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
-  const {extension, setExtension} = useState('');
+  const [extension, setExtension] = useState('');
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -67,20 +67,20 @@ const handleCalendarChange = (date) => {
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the drop down group /////////////////////////////////////////////
 const handleDropDownChange = (selectedAgency) => {
-  console.log(`handleDropDownChange`, selectedAgency);
+  // console.log(`handleDropDownChange`, selectedAgency);
   setSelectedAgency(selectedAgency);
 };
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the department in drop down group /////////////////////////////////////////////
 const handleDepartmentChange = (selectedDepartment) => {
-  console.log(`handleDepartmentChange`, selectedDepartment);
+  // console.log(`handleDepartmentChange`, selectedDepartment);
   setSelectedDepartment(selectedDepartment);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the office in drop down group ///////////////////////////////////
 const handleOfficeChange = (formData) => {
-  console.log(`handleOfficeChange`, formData);
+  // console.log(`handleOfficeChange`, formData);
   setFormData(formData);
 };
 
@@ -153,7 +153,10 @@ const handleOfficeChange = (formData) => {
     <br></br>
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
     <br/>
-    <InputFieldGroup onSelectedExtensionChange={handleExtensionChange} extension={extension}/>
+    <InputFieldGroup 
+    onSelectedExtensionChange={handleExtensionChange} 
+    extension={extension} 
+    setExtension={setExtension}/>
       <input type="submit" value="Submit" />
       <br/>
     </form>

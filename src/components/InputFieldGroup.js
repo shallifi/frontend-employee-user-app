@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
-// import useForm from '../hooks/useForm'
 
 
-
-function InputFieldGroup({ onSelectedExtensionChange, extension }) {
+function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension}) {
     const handleExtensionChange = (event) => {
         const { value } = event.target;
         if (value === "" || /^\d+$/.test(value)) {
             if (value.length <= 4) {
-                onSelectedExtensionChange(value);
+                setExtension(value);
             }
         }
     };
+    
 
   return (
     <div>
