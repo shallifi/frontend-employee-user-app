@@ -11,9 +11,10 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, o
         }
     };
 
-    const handleAddionalInfoChange = (event) => {
-        const { value } = event.target;
+    const handleAdditionalInfoChange = (event) => {
+        const value  = event.target.value;
         onAdditionalInfoChange(value);
+        console.log('handleAdd on Input component',value);
     };
 
     
@@ -34,8 +35,11 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, o
         <textarea
             type="text"
             name="additional_info"
-            onChange={handleAddionalInfoChange}
-            placeholder="additional information"
+            onChange={handleAdditionalInfoChange}
+            placeholder="Enter additional information "
+            style={{ height: 100, width: 300 }
+            }
+                  
         />
 
 

@@ -20,6 +20,7 @@ function FirstPage({ selectedDate}) {
   date: null,
 });
   const [extension, setExtension] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -40,6 +41,11 @@ function FirstPage({ selectedDate}) {
         setExtension(value);
       }
     }
+  };
+
+ const handleAdditionalInfoChange = (value) => {
+    setAdditionalInfo(value);
+    console.log('handleAdd on Input component First page',value);
   };
 
 
@@ -155,7 +161,8 @@ const handleOfficeChange = (formData) => {
     onSelectedExtensionChange={handleExtensionChange} 
     extension={extension} 
     setExtension={setExtension}
-    onAdditionalInfoChange/>
+    additionalInfo={additionalInfo}
+    onAdditionalInfoChange={handleAdditionalInfoChange} />
     <br></br>
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
     <br/>
