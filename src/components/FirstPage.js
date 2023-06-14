@@ -151,12 +151,13 @@ const handleOfficeChange = (formData) => {
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
-    <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
-    <br/>
     <InputFieldGroup 
     onSelectedExtensionChange={handleExtensionChange} 
     extension={extension} 
     setExtension={setExtension}/>
+    <br></br>
+    <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
+    <br/>
       <input type="submit" value="Submit" />
       <br/>
     </form>
