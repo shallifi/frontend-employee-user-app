@@ -1,7 +1,7 @@
 import React, {  } from 'react'
 
 
-function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension}) {
+function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, onAdditionalInfoChange}) {
     const handleExtensionChange = (event) => {
         const { value } = event.target;
         if (value === "" || /^\d+$/.test(value)) { // if value is empty or is a number
@@ -10,6 +10,12 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension}) 
             }
         }
     };
+
+    const handleAddionalInfoChange = (event) => {
+        const { value } = event.target;
+        onAdditionalInfoChange(value);
+    };
+
     
 
   return (
@@ -22,6 +28,14 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension}) 
             value={extension}
             onChange={handleExtensionChange}
             placeholder="four digit extension"
+        />
+        <br/>
+        <h5>Additional Information</h5>
+        <textarea
+            type="text"
+            name="additional_info"
+            onChange={handleAddionalInfoChange}
+            placeholder="additional information"
         />
 
 

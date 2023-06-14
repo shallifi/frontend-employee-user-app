@@ -154,7 +154,8 @@ const handleOfficeChange = (formData) => {
     <InputFieldGroup 
     onSelectedExtensionChange={handleExtensionChange} 
     extension={extension} 
-    setExtension={setExtension}/>
+    setExtension={setExtension}
+    onAdditionalInfoChange/>
     <br></br>
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
     <br/>
