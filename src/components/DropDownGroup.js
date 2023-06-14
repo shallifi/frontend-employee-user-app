@@ -72,7 +72,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
 
     // this is the function that is called when the user types in the office box
     const loadOfficeOptions = async (searchValue, callback) => {
-        console.log('loadOfficeOptions', searchValue);
+        // console.log('loadOfficeOptions', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/offices`);
             const json = await response.json();
@@ -88,7 +88,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
             }
 
             callback(options);
-            console.log(`loadO`, options);
+            // console.log(`loadO`, options);
         } catch (error) {
             console.error('Error fetching office options:', error);
         }

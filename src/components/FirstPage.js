@@ -43,9 +43,12 @@ function FirstPage({ selectedDate}) {
     }
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // handles the additional info text area /////////////////////////////////////////////
  const handleAdditionalInfoChange = (value) => {
     setAdditionalInfo(value);
-    console.log('handleAdd on Input component First page',value);
+    // console.log('handleAdd on Input component First page',value);
   };
 
 
@@ -109,6 +112,7 @@ const handleOfficeChange = (formData) => {
       department_id: selectedDepartment ? selectedDepartment.value : null,
       office_id: formData ? formData.value : null,
       extension: extension,
+      additional_info: additionalInfo,
 
      };
    
@@ -126,6 +130,7 @@ const handleOfficeChange = (formData) => {
     setSelectedDepartment(null);
     setFormData(null);
     setExtension('');
+    setAdditionalInfo('');
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);

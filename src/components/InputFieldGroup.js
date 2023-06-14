@@ -14,7 +14,7 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, o
     const handleAdditionalInfoChange = (event) => {
         const value  = event.target.value;
         onAdditionalInfoChange(value);
-        console.log('handleAdd on Input component',value);
+        // console.log('handleAdd on Input component',value);
     };
 
     
