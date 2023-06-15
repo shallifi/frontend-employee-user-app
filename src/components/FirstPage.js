@@ -21,7 +21,7 @@ function FirstPage({ selectedDate}) {
 });
   const [extension, setExtension] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
-  const [selectedNeeds, setselectedNeeds] = useState('');
+  const [selectedNeeds, setselectedNeeds] = useState([]);
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -121,7 +121,8 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       office_id: formData ? formData.value : null,
       extension: extension,
       additional_info: additionalInfo,
-      need_name: selectedNeeds ? selectedNeeds.value : '',
+      // need_name: selectedNeeds ? selectedNeeds.value : '',
+      selected_needs: selectedNeeds.map((option) => option.value),
 
      };
    
@@ -137,10 +138,10 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
     setLastName('');
     setSelectedAgency(null);
     setSelectedDepartment(null);
-    setFormData(null);
+    setFormData({});
     setExtension('');
     setAdditionalInfo('');
-    setselectedNeeds('');
+    setselectedNeeds([]);
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -168,7 +169,8 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} onSelectedNeedsChange={handleSelectedNeedsChange}/>
+    <DropDownGroup 
+    onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} onSelectedNeedsChange={handleSelectedNeedsChange}/>
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>

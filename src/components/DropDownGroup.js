@@ -8,7 +8,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
    const [agencyOptions, setAgencyOptions] = useState([]);
    const [departmentOptions, setDepartmentOptions] = useState([]);
    const [selectedAgency, setSelectedAgency] = useState(null);
-   const [selectedNeeds, setSelectedNeeds] = useState(null);
+   const [selectedNeeds, setSelectedNeeds] = useState([]);
    const { formData, setFormData } = useForm({
     date: null,
     });
@@ -139,10 +139,11 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     onSelectedOfficeChange(selectedOption); // Pass the selected office object
     };
 
-    const handleNeedsChange = (selectedOption) => {
-        console.log('handleNeedsChange', selectedOption);
+   
+    const handleMultiSelectChange = (selectedOption) => {
+        console.log('handleMutliSelectChange', selectedOption);
         setSelectedNeeds(selectedOption);
-    onSelectedNeedsChange(selectedOption); // Pass the selected needs 
+    onSelectedNeedsChange(selectedOption); // Pass the selected needs
     };
 
     //   this is the function that is called before the user types in the search box, to show the default options
@@ -210,7 +211,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         cacheOptions
         defaultOptions={needsOptions}
         loadOptions={loadNeedsOptions}
-        onChange={handleNeedsChange}
+        onChange={handleMultiSelectChange}
         value={selectedNeeds}
         isClearable
         isMulti
