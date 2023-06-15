@@ -4,13 +4,15 @@ import useForm from '../hooks/useForm';
 
 
 
-function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange}) {
+function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange, onSelectedNeedsChange}) {
    const [agencyOptions, setAgencyOptions] = useState([]);
    const [departmentOptions, setDepartmentOptions] = useState([]);
    const [selectedAgency, setSelectedAgency] = useState(null);
-   const { formData, setFormData, handleChange } = useForm({
+   const [selectedNeeds, setSelectedNeeds] = useState(null);
+   const { formData, setFormData } = useForm({
     date: null,
     });
+    const [needsOptions, setNeedsOptions] = useState([]);
 
     // this is the function that is called when the user types in the search box
     const loadAgencyOptions = async (searchValue, callback) => {
@@ -63,7 +65,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
             }
             
             callback(options);
-            console.log(`loadD`, options);
+            // console.log(`loadD`, options);
         } catch (error) {
             console.error('Error fetching department options:', error);
         }
@@ -94,6 +96,33 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         }
     };
 
+    const loadNeedsOptions = async (searchValue, callback) => {
+        console.log('loadNeedsOptions', searchValue);
+        try{
+            const response = await fetch(`http://localhost:3000/needs`);
+            const json = await response.json();
+
+            let options = json.map((need) => ({
+                value: need.id,
+                label: need.need_name,
+            })
+            );
+
+            if (searchValue) {
+                options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            }
+
+            callback(options);
+            console.log(`loadNeeds`, options);
+        } catch (error) {
+            console.error('Error fetching office options:', error);
+        }
+    };
+
+
+
+
+
 // this is the function that is called when the user selects an option
     const handleAgencyChange = (selectedOption) => {
         setSelectedAgency(selectedOption);
@@ -106,7 +135,14 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
 
 
     const handleOfficeChange = (selectedOption) => {
+        // console.log('handleOfficeChange', selectedOption);
     onSelectedOfficeChange(selectedOption); // Pass the selected office object
+    };
+
+    const handleNeedsChange = (selectedOption) => {
+        console.log('handleNeedsChange', selectedOption);
+        setSelectedNeeds(selectedOption);
+    onSelectedNeedsChange(selectedOption); // Pass the selected needs 
     };
 
     //   this is the function that is called before the user types in the search box, to show the default options
@@ -116,6 +152,9 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     });
      loadOfficeOptions('', (options) => {
             setFormData(options);
+    });
+    loadNeedsOptions('', (options) => {
+        setNeedsOptions(options);
     });
      
     }, []);
@@ -165,8 +204,19 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         loadOptions={loadOfficeOptions}
         onChange={handleOfficeChange}
         isClearable
+    />
+    <h5>NEEDS</h5>
+    <AsyncSelect
+        cacheOptions
+        defaultOptions={needsOptions}
+        loadOptions={loadNeedsOptions}
+        onChange={handleNeedsChange}
+        value={selectedNeeds}
+        isClearable
+        isMulti
 
     />
+
       </div>
   )
 }

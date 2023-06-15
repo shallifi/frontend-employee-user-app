@@ -21,6 +21,7 @@ function FirstPage({ selectedDate}) {
 });
   const [extension, setExtension] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
+  const [selectedNeeds, setselectedNeeds] = useState('');
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -42,6 +43,9 @@ function FirstPage({ selectedDate}) {
       }
     }
   };
+
+
+
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -93,6 +97,10 @@ const handleOfficeChange = (formData) => {
   setFormData(formData);
 };
 
+const handleSelectedNeedsChange = (selectedNeeds) => {
+console.log(`handleSelectedNeedsChange`, selectedNeeds);
+  setselectedNeeds(selectedNeeds);
+};
 
 
 
@@ -113,6 +121,7 @@ const handleOfficeChange = (formData) => {
       office_id: formData ? formData.value : null,
       extension: extension,
       additional_info: additionalInfo,
+      need_name: selectedNeeds ? selectedNeeds.value : '',
 
      };
    
@@ -131,6 +140,7 @@ const handleOfficeChange = (formData) => {
     setFormData(null);
     setExtension('');
     setAdditionalInfo('');
+    setselectedNeeds('');
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -158,7 +168,7 @@ const handleOfficeChange = (formData) => {
       </label>
       <br></br>
       <br></br>
-    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} />
+    <DropDownGroup onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} onSelectedNeedsChange={handleSelectedNeedsChange}/>
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
@@ -167,7 +177,8 @@ const handleOfficeChange = (formData) => {
     extension={extension} 
     setExtension={setExtension}
     additionalInfo={additionalInfo}
-    onAdditionalInfoChange={handleAdditionalInfoChange} />
+    onAdditionalInfoChange={handleAdditionalInfoChange}
+     />
     <br></br>
     <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
     <br/>
