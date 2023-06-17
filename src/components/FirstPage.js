@@ -121,8 +121,8 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       office_id: formData ? formData.value : null,
       extension: extension,
       additional_info: additionalInfo,
-      // need_name: selectedNeeds ? selectedNeeds.value : '',
       need_ids: selectedNeeds.map((option) => option.value),
+      // need_name: selectedNeeds ? selectedNeeds.value : '',
       // selected_needs: selectedNeeds.map((option) => ({ need_id: option.value})),
 
      };
@@ -150,7 +150,63 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
     });
   
   }
-
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  
+  //   const employeeData = {
+  //     first_name: firstName,
+  //     last_name: lastName,
+  //     new_to_scc: selectedOption['group1'],
+  //     driving_for_position: selectedOption['group2'],
+  //     transporting_children: selectedOption['group3'],
+  //     attending_preservice: selectedOption['group4'],
+  //     start_date: formData.date,
+  //     agency_id: selectedAgency ? selectedAgency.value : null,
+  //     department_id: selectedDepartment ? selectedDepartment.value : null,
+  //     office_id: formData ? formData.value : null,
+  //     extension: extension,
+  //     additional_info: additionalInfo,
+  //   };
+  
+  //   fetch('http://localhost:3000/employees', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(employeeData),
+  //     credentials: 'include',
+  //   })
+  //     .then((response) => response.json())
+  //     .then((employee) => {
+  //       const employeeId = employee.id;
+  //       const needsData = selectedNeeds.map((option) => ({
+  //         employee_id: employeeId,
+  //         need_id: option.value,
+  //       }));
+  
+  //       return fetch(`http://localhost:3000/employees/${employeeId}/needs`, {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify(needsData),
+  //         credentials: 'include',
+  //       });
+  //     })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log('Success:', data);
+  //       setFirstName('');
+  //       setLastName('');
+  //       setSelectedAgency(null);
+  //       setSelectedDepartment(null);
+  //       setFormData({});
+  //       setExtension('');
+  //       setAdditionalInfo('');
+  //       setselectedNeeds([]);
+  //       navigate('/second-page');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // }
+  
 
   return (
     <div className="App">
