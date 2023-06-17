@@ -157,7 +157,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     loadNeedsOptions('', (options) => {
         setNeedsOptions(options);
     });
-     
+     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     //  this is the function that is called before the user types in the department box, to show the default options

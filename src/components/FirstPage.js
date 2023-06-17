@@ -122,9 +122,11 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       extension: extension,
       additional_info: additionalInfo,
       // need_name: selectedNeeds ? selectedNeeds.value : '',
-      selected_needs: selectedNeeds.map((option) => option.value),
+      need_ids: selectedNeeds.map((option) => option.value),
+      // selected_needs: selectedNeeds.map((option) => ({ need_id: option.value})),
 
      };
+     console.log('need_ids', data.need_ids)
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',
