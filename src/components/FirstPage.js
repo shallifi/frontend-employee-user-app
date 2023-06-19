@@ -97,11 +97,15 @@ const handleOfficeChange = (formData) => {
 
   // handles the needs in drop down group ///////////////////////////////////
 const handleSelectedNeedsChange = (selectedNeeds) => {
-// console.log(`handleSelectedNeedsChange`, selectedNeeds);
+console.log(`handleSelectedNeedsChange on fp`, selectedNeeds);
   setselectedNeeds(selectedNeeds);
 };
 
-const handleSelectTitleChange = (selectedTitle) => {
+// const handleSelectTitleChange = (selectedTitle) => {
+//   console.log(`handleSelectTitleChange on FP`, selectedTitle);
+//   setSelectedTitle(selectedTitle);
+// };
+const handleTitleChange = (selectedTitle) => { 
   console.log(`handleSelectTitleChange on FP`, selectedTitle);
   setSelectedTitle(selectedTitle);
 };
@@ -184,7 +188,7 @@ const handleSelectTitleChange = (selectedTitle) => {
      onSelectedDepartmentChange={handleDepartmentChange}
      onSelectedOfficeChange={handleOfficeChange}
      onSelectedNeedsChange={handleSelectedNeedsChange}
-     onSelectedTitleChange={handleSelectTitleChange} />
+     onSelectedTitleChange={handleTitleChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>

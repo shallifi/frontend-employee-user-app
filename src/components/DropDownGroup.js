@@ -166,11 +166,12 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     const handleTitleChange = (selectedOption) => {
         console.log('handleTitleChange in DD group', selectedOption);
         setSelectedTitle(selectedOption);
+        onSelectedTitleChange(selectedOption);
     // onSelectedTitleChange(selectedOption); // Pass the selected title object
     };
    
     const handleMultiSelectChange = (selectedOption) => {
-        console.log('handleMutliSelectChange', selectedOption);
+        // console.log('handleMutliSelectChange', selectedOption);
         setSelectedNeeds(selectedOption);
     onSelectedNeedsChange(selectedOption); // Pass the selected needs
     };
@@ -180,14 +181,14 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         loadAgencyOptions('', (options) => {
             setAgencyOptions(options);
     });
-     loadOfficeOptions('', (options) => {
-            setFormData(options);
+        loadOfficeOptions('', (options) => {
+                setFormData(options);
     });
-    loadNeedsOptions('', (options) => {
-        setNeedsOptions(options);
+        loadNeedsOptions('', (options) => {
+            setNeedsOptions(options);
     });
-    loadTitleOptions('', (options) => {
-        setTitleOptions(options);
+        loadTitleOptions('', (options) => {
+            setTitleOptions(options);
     });
      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -245,6 +246,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         defaultOptions={titleOptions}
         loadOptions={loadTitleOptions}
         onChange={handleTitleChange}
+        value={selectedTitle}
         isClearable
     
     />
