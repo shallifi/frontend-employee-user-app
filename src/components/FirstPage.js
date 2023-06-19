@@ -16,6 +16,7 @@ function FirstPage({ selectedDate}) {
   const [selectedOption, setSelectedOption] = useState({});
   const [selectedAgency, setSelectedAgency] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [selectedTitle, setSelectedTitle] = useState(null);
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
@@ -43,9 +44,6 @@ function FirstPage({ selectedDate}) {
       }
     }
   };
-
-
-
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -83,24 +81,31 @@ const handleDropDownChange = (selectedAgency) => {
   // console.log(`handleDropDownChange`, selectedAgency);
   setSelectedAgency(selectedAgency);
 };
-/////////////////////////////////////////////////////////////////////////////////////
+
   // handles the department in drop down group /////////////////////////////////////////////
 const handleDepartmentChange = (selectedDepartment) => {
   // console.log(`handleDepartmentChange`, selectedDepartment);
   setSelectedDepartment(selectedDepartment);
 };
 
-/////////////////////////////////////////////////////////////////////////////////////
+
   // handles the office in drop down group ///////////////////////////////////
 const handleOfficeChange = (formData) => {
   // console.log(`handleOfficeChange`, formData);
   setFormData(formData);
 };
 
+  // handles the needs in drop down group ///////////////////////////////////
 const handleSelectedNeedsChange = (selectedNeeds) => {
-console.log(`handleSelectedNeedsChange`, selectedNeeds);
+// console.log(`handleSelectedNeedsChange`, selectedNeeds);
   setselectedNeeds(selectedNeeds);
 };
+
+const handleSelectTitleChange = (selectedTitle) => {
+  console.log(`handleSelectTitleChange on FP`, selectedTitle);
+  setSelectedTitle(selectedTitle);
+};
+
 
 
 
@@ -119,12 +124,11 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       agency_id: selectedAgency ? selectedAgency.value : null,
       department_id: selectedDepartment ? selectedDepartment.value : null,
       office_id: formData ? formData.value : null,
+      title_id: selectedTitle ? selectedTitle.value : null,
       extension: extension,
       additional_info: additionalInfo,
-      need_ids: selectedNeeds.map((option) => option.value),
-      // need_name: selectedNeeds ? selectedNeeds.value : '',
-      // selected_needs: selectedNeeds.map((option) => ({ need_id: option.value})),
-
+      need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
+ 
      };
      console.log('need_ids before submit', data.need_ids)
    
@@ -143,9 +147,10 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
     setSelectedAgency(null);
     setSelectedDepartment(null);
     setFormData({});
+    setSelectedTitle(null);
     setExtension('');
     setAdditionalInfo('');
-    setselectedNeeds([]);
+    setselectedNeeds([]); 
     navigate('/second-page');
   })
     .catch((error) => { console.error('Error:', error);
@@ -175,7 +180,11 @@ console.log(`handleSelectedNeedsChange`, selectedNeeds);
       <br></br>
       <br></br>
     <DropDownGroup 
-    onSelectedAgencyChange={handleDropDownChange} onSelectedDepartmentChange={handleDepartmentChange} onSelectedOfficeChange={handleOfficeChange} onSelectedNeedsChange={handleSelectedNeedsChange}/>
+     onSelectedAgencyChange={handleDropDownChange} 
+     onSelectedDepartmentChange={handleDepartmentChange}
+     onSelectedOfficeChange={handleOfficeChange}
+     onSelectedNeedsChange={handleSelectedNeedsChange}
+     onSelectedTitleChange={handleSelectTitleChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>

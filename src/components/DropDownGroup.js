@@ -4,11 +4,13 @@ import useForm from '../hooks/useForm';
 
 
 
-function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange, onSelectedNeedsChange}) {
+function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange, onSelectedNeedsChange, onSelectedTitleChange}) {
    const [agencyOptions, setAgencyOptions] = useState([]);
    const [departmentOptions, setDepartmentOptions] = useState([]);
+   const [titleOptions, setTitleOptions] = useState([]);
    const [selectedAgency, setSelectedAgency] = useState(null);
    const [selectedNeeds, setSelectedNeeds] = useState([]);
+   const [selectedTitle, setSelectedTitle] = useState([]);
    const { formData, setFormData } = useForm({
     date: null,
     });
@@ -97,7 +99,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     };
 
     const loadNeedsOptions = async (searchValue, callback) => {
-        console.log('loadNeedsOptions', searchValue);
+        // console.log('loadNeedsOptions', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/needs`);
             const json = await response.json();
@@ -113,12 +115,34 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
             }
 
             callback(options);
-            console.log(`loadNeeds`, options);
+            // console.log(`loadNeeds`, options);
         } catch (error) {
             console.error('Error fetching office options:', error);
         }
     };
 
+    const loadTitleOptions = async (searchValue, callback) => {
+        console.log('loadTitleOptions in DD group', searchValue);
+        try{
+            const response = await fetch(`http://localhost:3000/titles`);
+            const json = await response.json();
+
+            let options = json.map((title) => ({
+                value: title.id,
+                label: title.title_name,
+            })
+            );
+
+            if (searchValue) {
+                options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            }
+
+            callback(options);
+            console.log(`loadTitle after mapping`, options);
+        } catch (error) {
+            console.error('Error fetching title options:', error);
+        }
+    };
 
 
 
@@ -139,6 +163,11 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     onSelectedOfficeChange(selectedOption); // Pass the selected office object
     };
 
+    const handleTitleChange = (selectedOption) => {
+        console.log('handleTitleChange in DD group', selectedOption);
+        setSelectedTitle(selectedOption);
+    // onSelectedTitleChange(selectedOption); // Pass the selected title object
+    };
    
     const handleMultiSelectChange = (selectedOption) => {
         console.log('handleMutliSelectChange', selectedOption);
@@ -156,6 +185,9 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     });
     loadNeedsOptions('', (options) => {
         setNeedsOptions(options);
+    });
+    loadTitleOptions('', (options) => {
+        setTitleOptions(options);
     });
      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -206,6 +238,17 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         onChange={handleOfficeChange}
         isClearable
     />
+        <br/>
+    <h5>Title / Position </h5>
+    <AsyncSelect
+        cacheOptions
+        defaultOptions={titleOptions}
+        loadOptions={loadTitleOptions}
+        onChange={handleTitleChange}
+        isClearable
+    
+    />
+
     <h5>NEEDS</h5>
     <AsyncSelect
         cacheOptions
@@ -217,6 +260,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         isMulti
 
     />
+
 
       </div>
   )
