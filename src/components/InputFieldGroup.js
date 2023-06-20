@@ -1,15 +1,15 @@
 import React, {  } from 'react'
 
 
-function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, onAdditionalInfoChange}) {
-    const handleExtensionChange = (event) => {
-        const { value } = event.target;
-        if (value === "" || /^\d+$/.test(value)) { // if value is empty or is a number
-            if (value.length <= 4) { // if value is less than or equal to 4 characters
-                setExtension(value);
-            }
-        }
-    };
+function InputFieldGroup( { onSelectedExtensionChange, extension, setExtension, onAdditionalInfoChange}) {
+    // const handleExtensionChange = (event) => {
+    //     const { value } = event.target;
+    //     if (value === "" || /^\d+$/.test(value)) { // if value is empty or is a number
+    //         if (value.length <= 4) { // if value is less than or equal to 4 characters
+    //             setExtension(value);
+    //         }
+    //     }
+    // };
 
     const handleAdditionalInfoChange = (event) => {
         const value  = event.target.value;
@@ -27,7 +27,7 @@ function InputFieldGroup( {onSelectedExtensionChange, extension, setExtension, o
             type="text"
             name="extension"
             value={extension}
-            onChange={handleExtensionChange}
+            onChange={onSelectedExtensionChange}
             placeholder="four digit extension"
         />
         <br/>

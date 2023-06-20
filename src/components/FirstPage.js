@@ -7,6 +7,7 @@ import ButtonGroupLabels from './ButtonGroupLabels';
 import useForm from '../hooks/useForm';
 import DropDownGroup from './DropDownGroup';
 import InputFieldGroup from './InputFieldGroup';
+import BadgePhotoGroup from './BadgePhotoGroup';
 
 
 function FirstPage({ selectedDate}) {
@@ -17,6 +18,7 @@ function FirstPage({ selectedDate}) {
   const [selectedAgency, setSelectedAgency] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
+  // const [selectedPhoto, setSelectedPhoto] = useState('');
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
@@ -46,6 +48,23 @@ function FirstPage({ selectedDate}) {
   };
 
 
+/////////////////////////////////////////////////////////////////////////////////////
+  // handles the photo upload /////////////////////////////////////////////
+//   const handlePhotoChange = (event) => {
+//     console.log(event.target.files);
+//     // setSelectedPhoto(event.target.files[0]);
+//     const file = event.target.files[0];
+//     setSelectedPhoto(file);
+
+//     const reader = new FileReader();
+//     reader.onloadend = () => {
+//         setPhotoPreview(reader.result);
+//     };
+//     reader.readAsDataURL(file);
+// };
+ 
+
+
   /////////////////////////////////////////////////////////////////////////////
   // handles the additional info text area /////////////////////////////////////////////
  const handleAdditionalInfoChange = (value) => {
@@ -62,8 +81,6 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
     [groupName]: value,
   }));
 }; 
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
@@ -101,10 +118,7 @@ console.log(`handleSelectedNeedsChange on fp`, selectedNeeds);
   setselectedNeeds(selectedNeeds);
 };
 
-// const handleSelectTitleChange = (selectedTitle) => {
-//   console.log(`handleSelectTitleChange on FP`, selectedTitle);
-//   setSelectedTitle(selectedTitle);
-// };
+
 const handleTitleChange = (selectedTitle) => { 
   console.log(`handleSelectTitleChange on FP`, selectedTitle);
   setSelectedTitle(selectedTitle);
@@ -191,6 +205,10 @@ const handleTitleChange = (selectedTitle) => {
      onSelectedTitleChange={handleTitleChange} />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
+    <br></br>
+    <BadgePhotoGroup 
+      
+    />
     <br></br>
     <InputFieldGroup 
     onSelectedExtensionChange={handleExtensionChange} 

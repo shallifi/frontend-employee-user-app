@@ -122,7 +122,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     };
 
     const loadTitleOptions = async (searchValue, callback) => {
-        console.log('loadTitleOptions in DD group', searchValue);
+        // console.log('loadTitleOptions in DD group', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/titles`);
             const json = await response.json();
@@ -138,7 +138,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
             }
 
             callback(options);
-            console.log(`loadTitle after mapping`, options);
+            // console.log(`loadTitle after mapping`, options);
         } catch (error) {
             console.error('Error fetching title options:', error);
         }
