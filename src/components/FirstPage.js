@@ -10,7 +10,7 @@ import InputFieldGroup from './InputFieldGroup';
 import BadgePhotoGroup from './BadgePhotoGroup';
 
 
-function FirstPage({ selectedDate}) {
+function FirstPage({ selectedDate }) {
   const [firstName, setFirstName] = useState ('');
   const [lastName, setLastName] = useState ('');
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ function FirstPage({ selectedDate}) {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
   // const [selectedPhoto, setSelectedPhoto] = useState('');
+  const [badgePhoto, setBadgePhoto] = useState(null);
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
@@ -62,7 +63,10 @@ function FirstPage({ selectedDate}) {
 //     };
 //     reader.readAsDataURL(file);
 // };
- 
+const handleBadgePhotoChange = (file) => {
+  console.log('handleBadgePhotoChange',file);
+  setBadgePhoto(file);
+};
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -144,6 +148,7 @@ const handleTitleChange = (selectedTitle) => {
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
       extension: extension,
+      badge_photo: badgePhoto,
       additional_info: additionalInfo,
       need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
  
@@ -167,6 +172,7 @@ const handleTitleChange = (selectedTitle) => {
     setFormData({});
     setSelectedTitle(null);
     setExtension('');
+    setBadgePhoto('');
     setAdditionalInfo('');
     setselectedNeeds([]); 
     navigate('/second-page');
@@ -207,7 +213,7 @@ const handleTitleChange = (selectedTitle) => {
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
     <BadgePhotoGroup 
-      
+      photo={badgePhoto} handleBadgePhotoChange={handleBadgePhotoChange}
     />
     <br></br>
     <InputFieldGroup 

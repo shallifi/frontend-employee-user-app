@@ -1,15 +1,16 @@
 import React, { useState,useRef } from 'react'
 
-function BadgePhotoGroup() {
+function BadgePhotoGroup({photo, handleBadgePhotoChange}) {
     const [selectedPhoto, setSelectedPhoto] = useState('');
     const [photoPreview, setPhotoPreview] = useState('');
     const fileInputRef = useRef(null); // this is a reference to the file input field
     
     const handlePhotoChange = (event) => {
-        console.log(event.target.files);
+        console.log('BadgePhotoGroup handlePhotoChange',event.target.files);
         // setSelectedPhoto(event.target.files[0]);
         const file = event.target.files[0];
-        setSelectedPhoto(file);
+        // setSelectedPhoto(file);
+        handleBadgePhotoChange(file);
 
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -18,7 +19,13 @@ function BadgePhotoGroup() {
         reader.readAsDataURL(file);
     };
     
+    // const handleClearPhoto = () => {
+    //     setSelectedPhoto('');
+    //     setPhotoPreview('');
+    //     fileInputRef.current.value = ''; // this clears the file input field
+    // };
     const handleClearPhoto = () => {
+        handleBadgePhotoChange(null);
         setSelectedPhoto('');
         setPhotoPreview('');
         fileInputRef.current.value = ''; // this clears the file input field
