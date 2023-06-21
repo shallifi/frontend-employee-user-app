@@ -135,7 +135,8 @@ const handleTitleChange = (selectedTitle) => {
   // handles the submit button /////////////////////////////////////////////
   function handleSubmit(event) {
     event.preventDefault();
-    const data = { 
+    const formDataBig = new FormData();
+    const employeeData = { 
       first_name: firstName,
       last_name: lastName,
       new_to_scc: selectedOption['group1'], 
@@ -148,23 +149,50 @@ const handleTitleChange = (selectedTitle) => {
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
       extension: extension,
-      badge_photo: badgePhoto,
+      // badge_photo: badgePhoto,
       additional_info: additionalInfo,
       need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
  
      };
-     console.log('need_ids before submit', data.need_ids)
+
+    formDataBig.append('employee', JSON.stringify(employeeData));
+     formDataBig.append('badge_photo', badgePhoto);
+
+
+    // formDataBig.append('first_name', firstName);
+    // formDataBig.append('last_name', lastName);
+    // formDataBig.append('new_to_scc', selectedOption['group1']);
+    // formDataBig.append('driving_for_position', selectedOption['group2']);
+    // formDataBig.append('transporting_children', selectedOption['group3']);
+    // formDataBig.append('attending_preservice', selectedOption['group4']);
+    // formDataBig.append('start_date', formData.date);
+    // formDataBig.append('agency_id', selectedAgency ? selectedAgency.value : null);
+    // formDataBig.append('department_id', selectedDepartment ? selectedDepartment.value : null);
+    // formDataBig.append('office_id', formData ? formData.value : null);
+    // formDataBig.append('title_id', selectedTitle ? selectedTitle.value : null);
+    // formDataBig.append('extension', extension);
+    // formDataBig.append('badge_photo', badgePhoto);
+    // formDataBig.append('additional_info', additionalInfo);
+    // formDataBig.append('need_ids', selectedNeeds.map((option) => option.value)); // this is an array of need ids
+
+
+
+
+    //  console.log('need_ids before submit', data.need_ids)
+     console.log('need_ids before submit', formDataBig.badgePhoto)
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(data),
+      // headers: {"Content-Type": "application/json"},
+      // body: JSON.stringify(formDataBig),
+      body: formDataBig,
+      // body: formDataBig,
       credentials: 'include'
     })
     .then(response => response.json())
     .then(data => { 
       console.log('Success:', data)
-      console.log('Success:', data.need_ids);
+      // console.log('Success:', data.need_ids);
     setFirstName('');
     setLastName('');
     setSelectedAgency(null);
@@ -182,7 +210,7 @@ const handleTitleChange = (selectedTitle) => {
   
   }
   
-  
+ 
 
   return (
     <div className="App">
