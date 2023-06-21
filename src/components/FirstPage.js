@@ -176,17 +176,13 @@ const handleTitleChange = (selectedTitle) => {
     // formDataBig.append('need_ids', selectedNeeds.map((option) => option.value)); // this is an array of need ids
 
 
-
-
-    //  console.log('need_ids before submit', data.need_ids)
-     console.log('need_ids before submit', formDataBig.badgePhoto)
+       console.log(' before fetch POST', formDataBig.badgePhoto)
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',
+      body: formDataBig,
       // headers: {"Content-Type": "application/json"},
       // body: JSON.stringify(formDataBig),
-      body: formDataBig,
-      // body: formDataBig,
       credentials: 'include'
     })
     .then(response => response.json())
