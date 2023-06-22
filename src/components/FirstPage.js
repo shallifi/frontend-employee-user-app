@@ -7,7 +7,7 @@ import ButtonGroupLabels from './ButtonGroupLabels';
 import useForm from '../hooks/useForm';
 import DropDownGroup from './DropDownGroup';
 import InputFieldGroup from './InputFieldGroup';
-import BadgePhotoGroup from './BadgePhotoGroup';
+// import BadgePhotoGroup from './BadgePhotoGroup';
 
 
 function FirstPage({ selectedDate }) {
@@ -19,7 +19,7 @@ function FirstPage({ selectedDate }) {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
   // const [selectedPhoto, setSelectedPhoto] = useState('');
-  const [badgePhoto, setBadgePhoto] = useState(null);
+  // const [badgePhoto, setBadgePhoto] = useState(null);
   const { formData, setFormData, handleChange } = useForm({
   date: null,
 });
@@ -51,22 +51,11 @@ function FirstPage({ selectedDate }) {
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the photo upload /////////////////////////////////////////////
-//   const handlePhotoChange = (event) => {
-//     console.log(event.target.files);
-//     // setSelectedPhoto(event.target.files[0]);
-//     const file = event.target.files[0];
-//     setSelectedPhoto(file);
 
-//     const reader = new FileReader();
-//     reader.onloadend = () => {
-//         setPhotoPreview(reader.result);
-//     };
-//     reader.readAsDataURL(file);
+// const handleBadgePhotoChange = (file) => {
+//   console.log('handleBadgePhotoChange',file);
+//   setBadgePhoto(file);
 // };
-const handleBadgePhotoChange = (file) => {
-  console.log('handleBadgePhotoChange',file);
-  setBadgePhoto(file);
-};
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -156,27 +145,10 @@ const handleTitleChange = (selectedTitle) => {
      };
 
     formDataBig.append('employee', JSON.stringify(employeeData));
-     formDataBig.append('badge_photo', badgePhoto);
+    //  formDataBig.append('badge_photo', badgePhoto);
+  
 
-
-    // formDataBig.append('first_name', firstName);
-    // formDataBig.append('last_name', lastName);
-    // formDataBig.append('new_to_scc', selectedOption['group1']);
-    // formDataBig.append('driving_for_position', selectedOption['group2']);
-    // formDataBig.append('transporting_children', selectedOption['group3']);
-    // formDataBig.append('attending_preservice', selectedOption['group4']);
-    // formDataBig.append('start_date', formData.date);
-    // formDataBig.append('agency_id', selectedAgency ? selectedAgency.value : null);
-    // formDataBig.append('department_id', selectedDepartment ? selectedDepartment.value : null);
-    // formDataBig.append('office_id', formData ? formData.value : null);
-    // formDataBig.append('title_id', selectedTitle ? selectedTitle.value : null);
-    // formDataBig.append('extension', extension);
-    // formDataBig.append('badge_photo', badgePhoto);
-    // formDataBig.append('additional_info', additionalInfo);
-    // formDataBig.append('need_ids', selectedNeeds.map((option) => option.value)); // this is an array of need ids
-
-
-       console.log(' before fetch POST', formDataBig.badgePhoto)
+    // console.log(' before fetch POST', formDataBig.badgePhoto)
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',
@@ -196,7 +168,7 @@ const handleTitleChange = (selectedTitle) => {
     setFormData({});
     setSelectedTitle(null);
     setExtension('');
-    setBadgePhoto('');
+    // setBadgePhoto('');
     setAdditionalInfo('');
     setselectedNeeds([]); 
     navigate('/second-page');
@@ -236,9 +208,9 @@ const handleTitleChange = (selectedTitle) => {
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
-    <BadgePhotoGroup 
+    {/* <BadgePhotoGroup 
       photo={badgePhoto} handleBadgePhotoChange={handleBadgePhotoChange}
-    />
+    /> */}
     <br></br>
     <InputFieldGroup 
     onSelectedExtensionChange={handleExtensionChange} 
