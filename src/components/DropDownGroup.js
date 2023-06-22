@@ -4,10 +4,11 @@ import useForm from '../hooks/useForm';
 
 
 
-function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange, onSelectedNeedsChange, onSelectedTitleChange}) {
+function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSelectedOfficeChange, onSelectedNeedsChange, onSelectedTitleChange, onSelectedSupervisorChange, setSelectedSupervisor, selectedSupervisor}) {
    const [agencyOptions, setAgencyOptions] = useState([]);
    const [departmentOptions, setDepartmentOptions] = useState([]);
    const [titleOptions, setTitleOptions] = useState([]);
+   const [supervisorOptions, setSupervisorOptions] = useState([]);
    const [selectedAgency, setSelectedAgency] = useState(null);
    const [selectedNeeds, setSelectedNeeds] = useState([]);
    const [selectedTitle, setSelectedTitle] = useState([]);
@@ -16,6 +17,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     });
     const [needsOptions, setNeedsOptions] = useState([]);
 
+    ////////////////////////////////////////////////////////////////////////////
     // this is the function that is called when the user types in the search box
     const loadAgencyOptions = async (searchValue, callback) => {
         // console.log(`loadAgencyOptions`, searchValue);
@@ -144,6 +146,28 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         }
     };
 
+    const loadSupervisorOptions = async (searchValue, callback) => {
+        console.log('loadSupervisorOptions in DD group', searchValue);
+        try{
+            const response = await fetch(`http://localhost:3000/employees`);
+            const json = await response.json();
+
+            let options = json.map((employee) => ({
+                value: employee.id,
+                label: employee.first_name + ' ' + employee.last_name,
+            })
+            );
+
+            if (searchValue) {
+                options = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+            }
+
+            callback(options);
+            console.log(`loadSupervisor after mapping`, options);
+        } catch (error) {
+            console.error('Error fetching title options:', error);
+        }
+    };
 
 
 
@@ -161,6 +185,12 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     const handleOfficeChange = (selectedOption) => {
         // console.log('handleOfficeChange', selectedOption);
     onSelectedOfficeChange(selectedOption); // Pass the selected office object
+    };
+
+
+    const handleSupervisorChange = (selectedOption) => {
+        // console.log('handleSupervisorChange', selectedOption);
+    onSelectedSupervisorChange(selectedOption); // Pass the selected supervisor object
     };
 
     const handleTitleChange = (selectedOption) => {
@@ -190,6 +220,10 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         loadTitleOptions('', (options) => {
             setTitleOptions(options);
     });
+        loadSupervisorOptions('', (options) => {
+            setSupervisorOptions(options);
+    });
+
      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -207,7 +241,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
 
 
   return (
-    <div>DropDownGroup Section
+    <div>
         <br></br>
         <h5>Agency</h5>
     <AsyncSelect
@@ -250,6 +284,19 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         isClearable
     
     />
+
+        <br/>
+    <h5>Supervisor</h5>
+    <AsyncSelect
+        cacheOptions
+        defaultOptions={supervisorOptions}
+        loadOptions={loadSupervisorOptions}
+        onChange={handleSupervisorChange}
+        // value={selectedSupervisor}
+        isClearable
+    />
+
+        <br/>
 
     <h5>NEEDS</h5>
     <AsyncSelect

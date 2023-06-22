@@ -18,6 +18,7 @@ function FirstPage({ selectedDate }) {
   const [selectedAgency, setSelectedAgency] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
+  const [selectedSupervisor, setSelectedSupervisor] = useState(null);
   // const [selectedPhoto, setSelectedPhoto] = useState('');
   // const [badgePhoto, setBadgePhoto] = useState(null);
   const { formData, setFormData, handleChange } = useForm({
@@ -26,6 +27,7 @@ function FirstPage({ selectedDate }) {
   const [extension, setExtension] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [selectedNeeds, setselectedNeeds] = useState([]);
+ 
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the text input fields /////////////////////////////////////////////
@@ -47,6 +49,7 @@ function FirstPage({ selectedDate }) {
       }
     }
   };
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +120,10 @@ const handleTitleChange = (selectedTitle) => {
   setSelectedTitle(selectedTitle);
 };
 
-
+const handleSupervisorChange = (selectedSupervisor) => {
+  console.log(`handleSupervisorChange on FP`, selectedSupervisor);
+  setSelectedSupervisor(selectedSupervisor);
+};
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +143,7 @@ const handleTitleChange = (selectedTitle) => {
       department_id: selectedDepartment ? selectedDepartment.value : null,
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
+      employee_id: selectedSupervisor ? selectedSupervisor.value : null,
       extension: extension,
       // badge_photo: badgePhoto,
       additional_info: additionalInfo,
@@ -169,6 +176,7 @@ const handleTitleChange = (selectedTitle) => {
     setSelectedTitle(null);
     setExtension('');
     // setBadgePhoto('');
+    setSelectedSupervisor(null);
     setAdditionalInfo('');
     setselectedNeeds([]); 
     navigate('/second-page');
@@ -204,7 +212,11 @@ const handleTitleChange = (selectedTitle) => {
      onSelectedDepartmentChange={handleDepartmentChange}
      onSelectedOfficeChange={handleOfficeChange}
      onSelectedNeedsChange={handleSelectedNeedsChange}
-     onSelectedTitleChange={handleTitleChange} />
+     onSelectedTitleChange={handleTitleChange}
+     onSelectedSupervisorChange={handleSupervisorChange}
+     setSelectedSupervisor={setSelectedSupervisor}
+     selectedSupervisor={selectedSupervisor}
+     />
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
