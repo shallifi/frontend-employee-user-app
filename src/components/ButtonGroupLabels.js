@@ -5,6 +5,7 @@ import RadioGroup from './RadioGroup';
 function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChange, isSupervisor }) {
     const [selectedOption, setSelectedOption] = useState({});
     
+    console.log('in buttongroup beginning', isSupervisor)
 
     const handleRadioChange = (event, groupName) => {
         // console.log('handleRadioChange', event.target.value, groupName);
@@ -43,8 +44,8 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
           { id: 'inline-radio-14', label: 'Not Applicable' },
           ];   
     const group5Options = [
-            { id: 'inline-radio-15', label: 'Yes' },
-            { id: 'inline-radio-16', label: 'No' },
+            { id: 'inline-radio-15', label: 'Yes', value: true },
+            { id: 'inline-radio-16', label: 'No', value: false },
     ]; 
     
   return (
@@ -60,6 +61,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         handleRadioChange={handleIsSupervisorRadioChange}
         selectedOption={isSupervisor ? 'Yes' : 'No' }
         />
+        
 
     <h5>New to SCC/CBC project?</h5>
     <RadioGroup

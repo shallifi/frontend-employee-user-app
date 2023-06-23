@@ -80,8 +80,11 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
 }; 
 
 const handleIsSupervisorRadioChange = (event) => {
-  console.log('handleSupervisorChange', event.target.value);
-  setIsSupervisor(event.target.value === 'Yes');};
+  console.log('handleIsSupervisorChange', event.target.value);
+  setIsSupervisor(event.target.value === 'true');
+  // handleIsSupervisorRadioChange(event, 'group5');
+};
+
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
@@ -115,13 +118,13 @@ const handleOfficeChange = (formData) => {
 
   // handles the needs in drop down group ///////////////////////////////////
 const handleSelectedNeedsChange = (selectedNeeds) => {
-console.log(`handleSelectedNeedsChange on fp`, selectedNeeds);
+// console.log(`handleSelectedNeedsChange on fp`, selectedNeeds);
   setselectedNeeds(selectedNeeds);
 };
 
 
 const handleTitleChange = (selectedTitle) => { 
-  console.log(`handleSelectTitleChange on FP`, selectedTitle);
+  // console.log(`handleSelectTitleChange on FP`, selectedTitle);
   setSelectedTitle(selectedTitle);
 };
 
@@ -151,6 +154,8 @@ const handleSupervisorChange = (selectedSupervisor) => {
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
       extension: extension,
+      // supervisor_id: selectedSupervisor ? selectedSupervisor.value : null,
+      supervisor: isSupervisor,
       additional_info: additionalInfo,
       need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
  
@@ -170,7 +175,6 @@ const handleSupervisorChange = (selectedSupervisor) => {
     .then(response => response.json())
     .then(data => { 
       console.log('Success:', data)
-      // console.log('Success:', data.need_ids);
     setFirstName('');
     setLastName('');
     setSelectedAgency(null);
