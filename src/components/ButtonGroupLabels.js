@@ -59,7 +59,8 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         // handleRadioChange={(event) => handleIsSupervisorRadioChange(event, 'group5')}
         // selectedOption={selectedOption['group5'] === true ? 'Yes' : 'No' }    
         handleRadioChange={handleIsSupervisorRadioChange}
-        selectedOption={isSupervisor ? 'Yes' : 'No' }
+        selectedOption={isSupervisor ? 'Yes' : 'No'}
+        
         />
         
 

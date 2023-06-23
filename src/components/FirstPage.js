@@ -81,10 +81,7 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
 
 const handleIsSupervisorRadioChange = (event) => {
   console.log('handleIsSupervisorChange', event.target.value);
-  setIsSupervisor(event.target.value === 'true');
-  // handleIsSupervisorRadioChange(event, 'group5');
-};
-
+  setIsSupervisor(event.target.value === 'Yes');};
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
