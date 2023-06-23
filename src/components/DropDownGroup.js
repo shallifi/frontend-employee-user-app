@@ -147,12 +147,14 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     };
 
     const loadSupervisorOptions = async (searchValue, callback) => {
-        console.log('loadSupervisorOptions in DD group', searchValue);
+        // console.log('loadSupervisorOptions in DD group', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/employees`);
             const json = await response.json();
 
-            let options = json.map((employee) => ({
+            let supervisor = json.filter((employee) => employee.supervisor === true);
+
+            let options = supervisor.map((employee) => ({
                 value: employee.id,
                 label: employee.first_name + ' ' + employee.last_name,
             })

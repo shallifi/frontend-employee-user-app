@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import RadioGroup from './RadioGroup';
 
 
-function ButtonGroupLabels({ onSelectedOptionChange }) {
+function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChange, isSupervisor }) {
     const [selectedOption, setSelectedOption] = useState({});
     
 
     const handleRadioChange = (event, groupName) => {
         // console.log('handleRadioChange', event.target.value, groupName);
+
         setSelectedOption((prevSelectedOption) => ({ // this is the value of the selected radio button
             ...prevSelectedOption, 
             [groupName]: event.target.value,  
@@ -15,6 +16,10 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
         onSelectedOptionChange(event.target.value, groupName);       
         };
         
+// const handleSupervisorChange = (event) => {
+//     console.log('handleSupervisorChange', event.target.value);
+//     setIsSupervisor(event.target.value === 'Yes');};
+
 
     const group1Options = [
         { id: 'inline-radio-1', label: 'New' },
@@ -36,10 +41,26 @@ function ButtonGroupLabels({ onSelectedOptionChange }) {
           { id: 'inline-radio-12', label: 'Already has Certificate' },
           { id: 'inline-radio-13', label: 'Needs Waiver Test' },
           { id: 'inline-radio-14', label: 'Not Applicable' },
-          ];    
+          ];   
+    const group5Options = [
+            { id: 'inline-radio-15', label: 'Yes' },
+            { id: 'inline-radio-16', label: 'No' },
+    ]; 
     
   return (
     <div>ButtonGroupLabels
+
+    <h5>Is employee going to be a Supervisor?</h5>
+    <RadioGroup
+        name="group5"
+        options={group5Options}
+        inline
+        // handleRadioChange={(event) => handleIsSupervisorRadioChange(event, 'group5')}
+        // selectedOption={selectedOption['group5'] === true ? 'Yes' : 'No' }    
+        handleRadioChange={handleIsSupervisorRadioChange}
+        selectedOption={isSupervisor ? 'Yes' : 'No' }
+        />
+
     <h5>New to SCC/CBC project?</h5>
     <RadioGroup
         name="group1"

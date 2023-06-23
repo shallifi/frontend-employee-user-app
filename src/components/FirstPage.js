@@ -19,6 +19,7 @@ function FirstPage({ selectedDate }) {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
   const [selectedSupervisor, setSelectedSupervisor] = useState(null);
+  const [isSupervisor, setIsSupervisor] = useState(false);
   // const [selectedPhoto, setSelectedPhoto] = useState('');
   // const [badgePhoto, setBadgePhoto] = useState(null);
   const { formData, setFormData, handleChange } = useForm({
@@ -78,6 +79,10 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
   }));
 }; 
 
+const handleIsSupervisorRadioChange = (event) => {
+  console.log('handleSupervisorChange', event.target.value);
+  setIsSupervisor(event.target.value === 'Yes');};
+
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
 const handleCalendarChange = (date) => {
@@ -130,7 +135,9 @@ const handleSupervisorChange = (selectedSupervisor) => {
   // handles the submit button /////////////////////////////////////////////
   function handleSubmit(event) {
     event.preventDefault();
-    const formDataBig = new FormData();
+  
+
+
     const employeeData = { 
       first_name: firstName,
       last_name: lastName,
@@ -143,25 +150,21 @@ const handleSupervisorChange = (selectedSupervisor) => {
       department_id: selectedDepartment ? selectedDepartment.value : null,
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
-      employee_id: selectedSupervisor ? selectedSupervisor.value : null,
       extension: extension,
-      // badge_photo: badgePhoto,
       additional_info: additionalInfo,
       need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
  
      };
 
-    formDataBig.append('employee', JSON.stringify(employeeData));
-    //  formDataBig.append('badge_photo', badgePhoto);
+    console.log('before fetch employeeData', employeeData);
   
 
-    // console.log(' before fetch POST', formDataBig.badgePhoto)
+   
    
     fetch('http://localhost:3000/employees', {
       method: 'POST',
-      body: formDataBig,
-      // headers: {"Content-Type": "application/json"},
-      // body: JSON.stringify(formDataBig),
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(employeeData),
       credentials: 'include'
     })
     .then(response => response.json())
@@ -175,8 +178,8 @@ const handleSupervisorChange = (selectedSupervisor) => {
     setFormData({});
     setSelectedTitle(null);
     setExtension('');
-    // setBadgePhoto('');
-    setSelectedSupervisor(null);
+    // setSelectedSupervisor(null);
+    setIsSupervisor(false);
     setAdditionalInfo('');
     setselectedNeeds([]); 
     navigate('/second-page');
@@ -232,7 +235,11 @@ const handleSupervisorChange = (selectedSupervisor) => {
     onAdditionalInfoChange={handleAdditionalInfoChange}
      />
     <br></br>
-    <ButtonGroupLabels onSelectedOptionChange={handleSelectedOptionChange} selectedOption={selectedOption} /> 
+    <ButtonGroupLabels 
+    onSelectedOptionChange={handleSelectedOptionChange} 
+    selectedOption={selectedOption}
+    handleIsSupervisorRadioChange={handleIsSupervisorRadioChange}
+    isSupervisor={isSupervisor} /> 
     <br/>
       <input type="submit" value="Submit" />
       <br/>
