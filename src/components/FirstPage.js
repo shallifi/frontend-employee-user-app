@@ -81,7 +81,9 @@ const handleSelectedOptionChange = (value, groupName) => { // value is the value
 
 const handleIsSupervisorRadioChange = (event) => {
   console.log('handleIsSupervisorChange', event.target.value);
-  setIsSupervisor(event.target.value === 'Yes');};
+  setIsSupervisor(event.target.value === 'Yes');
+  
+};
 
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the calendar widget /////////////////////////////////////////////
@@ -151,7 +153,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
       office_id: formData ? formData.value : null,
       title_id: selectedTitle ? selectedTitle.value : null,
       extension: extension,
-      // supervisor_id: selectedSupervisor ? selectedSupervisor.value : null,
+      employee_id: selectedSupervisor ? selectedSupervisor.value : null,
       supervisor: isSupervisor,
       additional_info: additionalInfo,
       need_ids: selectedNeeds.map((option) => option.value), // this is an array of need ids
@@ -179,7 +181,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
     setFormData({});
     setSelectedTitle(null);
     setExtension('');
-    // setSelectedSupervisor(null);
+    setSelectedSupervisor(null);
     setIsSupervisor(false);
     setAdditionalInfo('');
     setselectedNeeds([]); 

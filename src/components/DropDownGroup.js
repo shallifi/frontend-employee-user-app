@@ -147,7 +147,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
     };
 
     const loadSupervisorOptions = async (searchValue, callback) => {
-        console.log('loadSupervisorOptions in DD group', searchValue);
+        // console.log('loadSupervisorOptions in DD group', searchValue);
         try{
             const response = await fetch(`http://localhost:3000/employees`);
             const json = await response.json();
@@ -165,7 +165,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
             }
 
             callback(options);
-            console.log(`loadSupervisor after mapping`, options);
+            // console.log(`loadSupervisor after mapping`, options);
         } catch (error) {
             console.error('Error fetching title options:', error);
         }
@@ -191,12 +191,12 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
 
 
     const handleSupervisorChange = (selectedOption) => {
-        // console.log('handleSupervisorChange', selectedOption);
+        console.log('handleSupervisorChange in dropdown group', selectedOption);
     onSelectedSupervisorChange(selectedOption); // Pass the selected supervisor object
     };
 
     const handleTitleChange = (selectedOption) => {
-        console.log('handleTitleChange in DD group', selectedOption);
+        // console.log('handleTitleChange in DD group', selectedOption);
         setSelectedTitle(selectedOption);
         onSelectedTitleChange(selectedOption);
     // onSelectedTitleChange(selectedOption); // Pass the selected title object
@@ -294,7 +294,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
         defaultOptions={supervisorOptions}
         loadOptions={loadSupervisorOptions}
         onChange={handleSupervisorChange}
-        // value={selectedSupervisor}
+        value={selectedSupervisor}
         isClearable
     />
 

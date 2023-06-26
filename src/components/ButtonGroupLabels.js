@@ -5,7 +5,7 @@ import RadioGroup from './RadioGroup';
 function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChange, isSupervisor }) {
     const [selectedOption, setSelectedOption] = useState({});
     
-    console.log('in buttongroup beginning', isSupervisor)
+    // console.log('in buttongroup beginning', isSupervisor)
 
     const handleRadioChange = (event, groupName) => {
         // console.log('handleRadioChange', event.target.value, groupName);
@@ -60,7 +60,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         // selectedOption={selectedOption['group5'] === true ? 'Yes' : 'No' }    
         handleRadioChange={handleIsSupervisorRadioChange}
         selectedOption={isSupervisor ? 'Yes' : 'No'}
-        
+       
         />
         
 
