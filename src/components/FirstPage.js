@@ -7,6 +7,7 @@ import ButtonGroupLabels from './ButtonGroupLabels';
 import useForm from '../hooks/useForm';
 import DropDownGroup from './DropDownGroup';
 import InputFieldGroup from './InputFieldGroup';
+import FilterPage from './FilterPage';
 // import BadgePhotoGroup from './BadgePhotoGroup';
 
 
@@ -247,7 +248,12 @@ const handleSupervisorChange = (selectedSupervisor) => {
       <input type="submit" value="Submit" />
       <br/>
     </form>
-
+    <FilterPage 
+    firstName={firstName}
+    lastName={lastName}
+    setFirstName={setFirstName}
+    setLastName={setLastName}
+    />
 
      </div>
   );
