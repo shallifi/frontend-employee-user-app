@@ -1,4 +1,5 @@
 import './App.css';
+import FilterPage from './components/FilterPage';
 // import ButtonTest from './components/ButtonTest';
 // import CalendarWidget from './components/CalendarWidget';
 import FirstPage from './components/FirstPage';
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FirstPage />} />
         <Route path="/second-page" element={<SecondPage />} />
+        <Route path="/filter-page" element={<FilterPage />} />
       </Routes>
     
     </div>
