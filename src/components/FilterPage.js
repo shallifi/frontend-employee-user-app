@@ -43,7 +43,7 @@ function FilterPage(firstName, lastName, setFirstName, setLastName) {
             fetch('http://localhost:3000/employees', {
                 method: 'GET',
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(employeeData),
+                // body: JSON.stringify(employeeData),
                 credentials: 'include'
                 })
                 .then(response => response.json())
