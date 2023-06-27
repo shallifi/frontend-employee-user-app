@@ -28,7 +28,16 @@ function FilterPage(firstName, lastName, setFirstName, setLastName) {
         const data = React.useMemo(() => [], []);
 
         // define the table instance
-        const tableInstance = useTable({ columns, data }, useFilters, useSortBy);
+        // const tableInstance = useTable({ columns, data }, useFilters, useSortBy);
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+            } = useTable({ columns, data }, useFilters, useSortBy);
+
+        
 
         useEffect(() => {
             fetch('http://localhost:3000/employees', {
