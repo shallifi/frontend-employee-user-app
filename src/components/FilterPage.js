@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from "react-table";
 import { useTable, useSortBy, useFilters} from 'react-table'
 
-function FilterPage(firstName, lastName, setFirstName, setLastName) {
+function FilterPage({firstName, lastName, setFirstName, setLastName}) {
+    const [tableData, setTableData] = useState([]);
     
+
     const employeeData = { 
         first_name: firstName,
         last_name: lastName
@@ -35,7 +37,7 @@ function FilterPage(firstName, lastName, setFirstName, setLastName) {
             headerGroups,
             rows,
             prepareRow,
-            } = useTable({ columns, data }, useFilters, useSortBy);
+            } = useTable({ columns, data: tableData }, useFilters, useSortBy);
 
         
 
@@ -49,6 +51,7 @@ function FilterPage(firstName, lastName, setFirstName, setLastName) {
                 .then(response => response.json())
                 .then(data => {
                 console.log('Success:', data)
+                setTableData(data); // set the data for the table
                 setFirstName('');   
                 setLastName('');
                 })
