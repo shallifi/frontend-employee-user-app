@@ -253,6 +253,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
     lastName={lastName}
     setFirstName={setFirstName}
     setLastName={setLastName}
+    setSelectedTitle={setSelectedTitle}
     />
 
      </div>
