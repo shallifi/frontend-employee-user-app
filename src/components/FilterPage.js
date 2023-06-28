@@ -23,7 +23,8 @@ function FilterPage({}) {
             {
                 Header: 'Title/Position',
                 // accessor: 'title_name',
-                accessor: (employee) => employee.title?.title_name || 'N/A'
+                accessor: (employee) => employee.title?.title_name || 'N/A',
+                Filter: CustomFilter,
             },
         ],
         []
