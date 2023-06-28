@@ -5,7 +5,7 @@ import { useTable, useFilters, useGlobalFilter, useSortBy} from 'react-table'
 import CustomFilter from './CustomFilter';
 
 
-function FilterPage({}) {
+function FilterPage() {
     const [tableData, setTableData] = useState([]);
     
     const columns = React.useMemo(
@@ -79,6 +79,7 @@ function FilterPage({}) {
                 })
                 .catch((error) => { console.error('Error:', error);
                 });
+                // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []); 
 
 
