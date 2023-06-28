@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from 'react'
 // import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from "react-table";
-import { useTable, useSortBy, useFilters} from 'react-table'
+import { useTable, useFilters, useGlobalFilter, useSortBy} from 'react-table'
+// import DefaultColFilter from './DefaultColFilter';
+import CustomFilter from './CustomFilter';
+
 
 function FilterPage({}) {
     const [tableData, setTableData] = useState([]);
     
-
-    // const employeeData = { 
-    //     first_name: firstName,
-    //     last_name: lastName
-    //     };
-
-        // define the columns
-        const columns = React.useMemo(
-            () => [
-                {
-                    Header: 'First Name',
-                    accessor: 'first_name', // accessor is the "key" in the data
-                },
-                {
-                    Header: 'Last Name',
-                    accessor: 'last_name',
-                },
-                {
-                    Header: 'Title/Position',
-                    // accessor: 'title_name',
-                    accessor: (employee) => employee.title?.title_name || 'N/A'
-                },
-            ],
-            []
-        );
-            console.log('tableData on filterpage', tableData);
-        // define the data
-        const data = React.useMemo(() => [], []);
-
-        // define the table instance
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: 'First Name',
+                accessor: 'first_name', // accessor is the "key" in the data
+                Filter: CustomFilter,
+            },
+            {
+                Header: 'Last Name',
+                accessor: 'last_name',
+                Filter: CustomFilter,
+            },
+            {
+                Header: 'Title/Position',
+                // accessor: 'title_name',
+                accessor: (employee) => employee.title?.title_name || 'N/A'
+            },
+        ],
+        []
+    );
+        // console.log('tableData on filterpage', tableData);
+    // define the data
+    const data = React.useMemo(() => [], []);
       
         const {
             getTableProps,
@@ -42,7 +38,13 @@ function FilterPage({}) {
             headerGroups,
             rows,
             prepareRow,
-            } = useTable({ columns, data: tableData }, useFilters, useSortBy);
+            setGlobalFilter,
+            } = useTable(
+              { columns, data: tableData },
+               useFilters,
+               useGlobalFilter,
+               useSortBy
+               );
 
         
 
@@ -51,7 +53,6 @@ function FilterPage({}) {
             fetch('http://localhost:3000/employees', {
                 method: 'GET',
                 headers: {"Content-Type": "application/json"},
-                // body: JSON.stringify(employeeData),
                 credentials: 'include'
                 }).then(response => response.json()),
                 fetch('http://localhost:3000/titles', {
@@ -60,10 +61,9 @@ function FilterPage({}) {
                   credentials: 'include'
                   }).then(response => response.json()),
                 ])
-                // .then(data => {
-                .then(([employeeData, titleData]) => {
-                  console.log('useEffect employeeData', employeeData);
-                  console.log('useEffect titleData', titleData);
+                  .then(([employeeData, titleData]) => {
+                  // console.log('useEffect employeeData', employeeData);
+                  // console.log('useEffect titleData', titleData);
                   const modifiedData = employeeData.map(employee => ({
                     ...employee,
                     title: titleData.find(title => title.id === employee.title_id)
@@ -71,14 +71,10 @@ function FilterPage({}) {
 
                 console.log('Success:', data)
                 setTableData(data); // set the data for the table
-                // const modifiedData = data.map(employee => ({ 
-                //   ...employee,
-                //   title_name: employee.title.title_name
-                // }));
+
                 setTableData(modifiedData);
 
-                // setFirstName('');   
-                // setLastName('');
+ 
                 })
                 .catch((error) => { console.error('Error:', error);
                 });
@@ -87,6 +83,13 @@ function FilterPage({}) {
 
     
       return (
+        <div>
+          <input
+            // value={globalFilter || ''}
+            type='text'
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder={'Search'}
+          />
         <table {...getTableProps()}>
         <thead>
           {/* // Loop over the header rows */}
@@ -95,6 +98,12 @@ function FilterPage({}) {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
+                  {/* Render the columns filter UI */}
+                  {column.Filter ? (
+                    <div>{column.render('Filter')}</div>
+                  ) : null}
+                  
+                  {/* Add a sort direction indicator */}
                   <span>
                     {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                   </span>
@@ -119,45 +128,10 @@ function FilterPage({}) {
           })}
         </tbody>
       </table>
+      </div>
     )
     }
 export default FilterPage;
 
     
 
-
-//   return (
-    
-//     <div>
-//         FilterPage
-//         <table>
-//       {/* Table header */}
-//       <thead>
-//         <tr>
-//           <th>Name</th>
-//           <th>Title/Position</th>
-//           <th>Office location</th>
-//           <th>Ext</th>
-//           <th>Email</th>
-//           <th>Supervisor Name</th>
-//           <th>Supervisor Title/Position</th>
-//           <th>Ext</th>
-//           <th>Email</th>
-//           <th>Agency</th>
-//           <th>Department</th>
-//           <th>Badge Photo</th>
-//         </tr>
-//       </thead>
-
-//       {/* Table body */}
-//       <tbody>
-//         {/* Table rows will be dynamically generated */}
-//       </tbody>
-//     </table>
-
-
-        
-        
-//         </div>
-//   )
-// }
