@@ -26,6 +26,11 @@ function FilterPage() {
                 accessor: (employee) => employee.title?.title_name || 'N/A',
                 Filter: CustomFilter,
             },
+            {
+              Header: 'Office',
+              accessor: (employee) => employee.office?.office_name || 'N/A',
+              Filter: CustomFilter,
+            },
         ],
         []
     );
