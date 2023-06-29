@@ -66,21 +66,32 @@ function FilterPage() {
                   headers: {"Content-Type": "application/json"},
                   credentials: 'include'
                   }).then(response => response.json()),
+                fetch('http://localhost:3000/offices', {
+                  method: 'GET',
+                  headers: {"Content-Type": "application/json"},
+                  credentials: 'include'
+                  }).then(response => response.json()),
                 ])
-                  .then(([employeeData, titleData]) => {
+                  .then(([employeeData, titleData, officeData]) => {
                   // console.log('useEffect employeeData', employeeData);
                   // console.log('useEffect titleData', titleData);
+                  // console.log('useEffect officeData', officeData);
                   const modifiedData = employeeData.map(employee => ({
                     ...employee,
                     title: titleData.find(title => title.id === employee.title_id)
+                  }));
+                  const modifiedDataTwo = employeeData.map(employee => ({
+                    ...employee,
+                    office: officeData.find(office => office.id === employee.office_id)
                   }));
 
                 console.log('Success:', data)
                 setTableData(data); // set the data for the table
 
-                setTableData(modifiedData);
+                setTableData(modifiedData, modifiedDataTwo);
 
- 
+                // console.log('modifiedData', modifiedData);
+                  console.log('modifiedData2', modifiedDataTwo);
                 })
                 .catch((error) => { console.error('Error:', error);
                 });
@@ -126,6 +137,7 @@ function FilterPage() {
               // Use a React.Fragment here so the table markup is still valid
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
+                  // const accessor = cell.column.id === 'office' ? 'office.office_name' : cell.column.id;
                   return (
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );
