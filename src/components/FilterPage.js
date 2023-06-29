@@ -78,20 +78,17 @@ function FilterPage() {
                   // console.log('useEffect officeData', officeData);
                   const modifiedData = employeeData.map(employee => ({
                     ...employee,
-                    title: titleData.find(title => title.id === employee.title_id)
-                  }));
-                  const modifiedDataTwo = employeeData.map(employee => ({
-                    ...employee,
+                    title: titleData.find(title => title.id === employee.title_id),
                     office: officeData.find(office => office.id === employee.office_id)
                   }));
-
+              
                 console.log('Success:', data)
                 setTableData(data); // set the data for the table
 
-                setTableData(modifiedData, modifiedDataTwo);
+                setTableData(modifiedData);
 
                 // console.log('modifiedData', modifiedData);
-                  console.log('modifiedData2', modifiedDataTwo);
+                
                 })
                 .catch((error) => { console.error('Error:', error);
                 });
