@@ -31,6 +31,10 @@ function FilterPage() {
               accessor: (employee) => employee.office?.office_name || 'N/A',
               Filter: CustomFilter,
             },
+            {
+              Header: 'Extension',
+              accessor: 'extension',
+            },
         ],
         []
     );
