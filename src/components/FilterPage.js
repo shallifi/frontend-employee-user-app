@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from "react-table";
-import { useTable, useFilters, useGlobalFilter, useSortBy} from 'react-table'
 // import DefaultColFilter from './DefaultColFilter';
+import { useTable, useFilters, useGlobalFilter, useSortBy} from 'react-table'
 import CustomFilter from './CustomFilter';
 
 
@@ -35,10 +35,15 @@ function FilterPage() {
               Header: 'Extension',
               accessor: 'extension',
             },
+            {
+              Header: 'Supervisor',
+              accessor: (employee) => employee.supervisor ? `${employee.supervisor.first_name} ${employee.supervisor.last_name}` : 'N/A',
+              Filter: CustomFilter,
+            },
         ],
         []
     );
-        // console.log('tableData on filterpage', tableData);
+        console.log('tableData on filterpage', tableData);
     // define the data
     const data = React.useMemo(() => [], []);
       
@@ -83,7 +88,8 @@ function FilterPage() {
                   const modifiedData = employeeData.map(employee => ({
                     ...employee,
                     title: titleData.find(title => title.id === employee.title_id),
-                    office: officeData.find(office => office.id === employee.office_id)
+                    office: officeData.find(office => office.id === employee.office_id),
+                    supervisor: employeeData.find((supervisor) => supervisor.id === employee.employee_id), 
                   }));
               
                 console.log('Success:', data)
