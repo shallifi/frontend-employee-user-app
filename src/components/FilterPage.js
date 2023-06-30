@@ -45,6 +45,11 @@ function FilterPage() {
               accessor: (employee) => employee.agency?.agency_name || 'N/A',
               Filter: CustomFilter,
             },
+            {
+              Header: 'Department',
+              accessor: (employee) => employee.department?.department_name || 'N/A',
+              Filter: CustomFilter,
+            },
         ],
         []
     );
@@ -90,8 +95,13 @@ function FilterPage() {
                     headers: {"Content-Type": "application/json"},
                     credentials: 'include'
                     }).then(response => response.json()),
+                    fetch('http://localhost:3000/departments', {
+                      method: 'GET',
+                      headers: {"Content-Type": "application/json"},
+                      credentials: 'include'
+                      }).then(response => response.json()),
                 ])
-                  .then(([employeeData, titleData, officeData, agencyData]) => {
+                  .then(([employeeData, titleData, officeData, agencyData, departmentData]) => {
                   // console.log('useEffect employeeData', employeeData);
                   // console.log('useEffect titleData', titleData);
                   // console.log('useEffect officeData', officeData);
@@ -100,7 +110,8 @@ function FilterPage() {
                     title: titleData.find(title => title.id === employee.title_id),
                     office: officeData.find(office => office.id === employee.office_id),
                     supervisor: employeeData.find((supervisor) => supervisor.id === employee.employee_id),
-                    agency: agencyData.find(agency => agency.id === employee.agency_id), 
+                    agency: agencyData.find(agency => agency.id === employee.agency_id),
+                    department: departmentData.find(department => department.id === employee.department_id), 
                   }));
               
                 console.log('Success:', data)
@@ -120,12 +131,12 @@ function FilterPage() {
     
       return (
         <div>
-          <input
+          {/* <input
             // value={globalFilter || ''}
             type='text'
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder={'Search'}
-          />
+          /> */}
         <table {...getTableProps()}>
         <thead>
           {/* // Loop over the header rows */}
