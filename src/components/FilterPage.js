@@ -114,7 +114,7 @@ function FilterPage() {
                     department: departmentData.find(department => department.id === employee.department_id), 
                   }));
               
-                console.log('Success:', data)
+                // console.log('Success:', data)
                 setTableData(data); // set the data for the table
 
                 setTableData(modifiedData);
@@ -164,9 +164,19 @@ function FilterPage() {
             prepareRow(row);
             return (
               // Use a React.Fragment here so the table markup is still valid
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()}
+              onClick={() => {
+                console.log('selected row:', row);
+
+              }}
+              // add hover style to row
+              // style={{cursor: 'pointer'}} // add mouse hover style
+              
+              
+              
+              >
                 {row.cells.map((cell) => {
-                  // const accessor = cell.column.id === 'office' ? 'office.office_name' : cell.column.id;
+                  
                   return (
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );
