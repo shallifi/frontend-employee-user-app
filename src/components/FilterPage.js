@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react'
 // import DefaultColFilter from './DefaultColFilter';
 import { useTable, useFilters, useSortBy} from 'react-table'
 import CustomFilter from './CustomFilter';
+import EmpModal from './EmpModal';
 
 
-function FilterPage() {
+
+function FilterPage({ employees, showModal, setShowModal}) {
     const [tableData, setTableData] = useState([]);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
     // const [isHovered, setIsHovered] = useState(false);
 
     const columns = React.useMemo(
@@ -128,20 +131,16 @@ function FilterPage() {
                 // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []); 
 
-        // const handleMouseEnter = (e) => {
-        //   setIsHovered(true);
-        // };
-
-        // const handleMouseLeave = (e) => {
-        //   setIsHovered(false);
-        // };
+        const handleOpenModal = (employee) => {
+          setSelectedEmployee(employee);
+        }
 
     
       return (
         <div>
 
         <table {...getTableProps()}
-        className='table table-striped table-bordered table-hover'
+        className='table table-striped table-bordered table-hover' //adding the bootstrap classes to the table
         style={{ width: '100%' }} // This will force the table body to overflow and scroll, since there is not enough room
 
         
@@ -176,7 +175,9 @@ function FilterPage() {
                 {...row.getRowProps()}
                 onClick={() => {
                   console.log('selected row:', row);
-
+                  handleOpenModal(row.original);
+                  // selectedEmployee(row.original);
+                  // setShowModal(true);
                 }}
       
                 >
@@ -191,7 +192,16 @@ function FilterPage() {
             );
           })}
         </tbody>
+          <EmpModal
+            employee={selectedEmployee}
+            showModal={selectedEmployee !== null}
+            handleCloseModal={() => setSelectedEmployee(null)}
+            // handleCloseModal={() => setShowModal(false)}
+            />
       </table>
+
+
+
       </div>
     )
     }
