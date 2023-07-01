@@ -171,7 +171,15 @@ function FilterPage() {
               }}
               // add hover style to row
               // style={{cursor: 'pointer'}} // add mouse hover style
-              
+              style={{ background: row.isSelected ? 'lightgreen' : 'inherit' }}  // add selected row style
+              onMouseEnter={() => {
+                console.log('mouse enter row:', row);
+              }
+              }
+              onMouseLeave={() => {
+                console.log('mouse leave row:', row);
+              }
+              }
               
               
               >
