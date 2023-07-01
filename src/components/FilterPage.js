@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 // import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from "react-table";
 // import DefaultColFilter from './DefaultColFilter';
-import { useTable, useFilters, useGlobalFilter, useSortBy} from 'react-table'
+import { useTable, useFilters, useSortBy} from 'react-table'
 import CustomFilter from './CustomFilter';
 
 
 function FilterPage() {
     const [tableData, setTableData] = useState([]);
-    
+    // const [isHovered, setIsHovered] = useState(false);
+
     const columns = React.useMemo(
         () => [
             {
@@ -63,11 +64,11 @@ function FilterPage() {
             headerGroups,
             rows,
             prepareRow,
-            setGlobalFilter,
+            // setGlobalFilter,
             } = useTable(
               { columns, data: tableData },
                useFilters,
-               useGlobalFilter,
+              //  useGlobalFilter,
                useSortBy
                );
 
@@ -127,17 +128,24 @@ function FilterPage() {
                 // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []); 
 
+        // const handleMouseEnter = (e) => {
+        //   setIsHovered(true);
+        // };
+
+        // const handleMouseLeave = (e) => {
+        //   setIsHovered(false);
+        // };
 
     
       return (
         <div>
-          {/* <input
-            // value={globalFilter || ''}
-            type='text'
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            placeholder={'Search'}
-          /> */}
-        <table {...getTableProps()}>
+
+        <table {...getTableProps()}
+        className='table table-striped table-bordered table-hover'
+        style={{ width: '100%' }} // This will force the table body to overflow and scroll, since there is not enough room
+
+        
+        >
         <thead>
           {/* // Loop over the header rows */}
           {headerGroups.map((headerGroup) => (
@@ -164,25 +172,15 @@ function FilterPage() {
             prepareRow(row);
             return (
               // Use a React.Fragment here so the table markup is still valid
-              <tr {...row.getRowProps()}
-              onClick={() => {
-                console.log('selected row:', row);
+              <tr 
+                {...row.getRowProps()}
+                onClick={() => {
+                  console.log('selected row:', row);
 
-              }}
-              // add hover style to row
-              // style={{cursor: 'pointer'}} // add mouse hover style
-              style={{ background: row.isSelected ? 'lightgreen' : 'inherit' }}  // add selected row style
-              onMouseEnter={() => {
-                console.log('mouse enter row:', row);
-              }
-              }
-              onMouseLeave={() => {
-                console.log('mouse leave row:', row);
-              }
-              }
-              
-              
-              >
+                }}
+      
+                >
+
                 {row.cells.map((cell) => {
                   
                   return (

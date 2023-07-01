@@ -51,6 +51,13 @@ th {
   padding: 2px 4px;
 }
 
+td {
+  border-right: 1px solid lightgray;
+  padding: 2px 4px;
+}
+
+
+
 tfoot {
   color: gray;
 }
@@ -58,3 +65,11 @@ tfoot {
 tfoot th {
   font-weight: normal;
 }
+
+ .hovered-row {
+  background-color: rgb(211, 211, 211); 
+}
+
+/* .hovered-row td {
+  background-color: #eee3ee; 
+} */
