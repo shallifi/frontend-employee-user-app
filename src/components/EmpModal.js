@@ -14,8 +14,10 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
             <p>Name: {employee.first_name} {employee.last_name}</p>
             {/* <p>Last Name: {employee.last_name}</p> */}
             <p>Title: {employee.title?.title_name || 'N/A'}</p>
-            <p>Office: {employee.office?.office_name || 'N/A'}</p>
-            <p>Extension: {employee.extension}</p>
+            <p>Office: {employee.office?.office_name || 'N/A'} </p>
+            {/* <p>{employee.office?.office_phone} </p>
+            <p> {employee.office?.address}</p> */}
+             <p>Extension: {employee.extension}</p>
             <p>Supervisor: {employee.supervisor ? `${employee.supervisor.first_name} ${employee.supervisor.last_name}` : 'N/A'}</p>
             {/* Add more employee fields as needed */}
           </div>
