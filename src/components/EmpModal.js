@@ -14,6 +14,8 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
             <p>Name: {employee.first_name} {employee.last_name}</p>
             {/* <p>Last Name: {employee.last_name}</p> */}
             <p>Title: {employee.title?.title_name || 'N/A'}</p>
+            <p>Agency: {employee.agency?.agency_name || 'N/A'}</p>
+            <p>Department: {employee.department?.department_name || 'N/A'}</p>
             <p>Office: {employee.office?.office_name || 'N/A'} </p>
             {/* <p>{employee.office?.office_phone} </p>
             <p> {employee.office?.address}</p> */}
@@ -26,6 +28,9 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseModal}>
           Close
+        </Button>
+        <Button variant="primary" onClick={handleCloseModal}> {/* Add onClick handler to edit */}
+          Edit
         </Button>
       </Modal.Footer>
     </Modal>
