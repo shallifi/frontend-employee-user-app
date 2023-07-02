@@ -7,7 +7,7 @@ import EmpModal from './EmpModal';
 
 
 
-function FilterPage({ employees, showModal, setShowModal}) {
+function FilterPage() {
     const [tableData, setTableData] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     // const [isHovered, setIsHovered] = useState(false);
@@ -176,8 +176,7 @@ function FilterPage({ employees, showModal, setShowModal}) {
                 onClick={() => {
                   console.log('selected row:', row);
                   handleOpenModal(row.original);
-                  // selectedEmployee(row.original);
-                  // setShowModal(true);
+
                 }}
       
                 >
@@ -196,7 +195,6 @@ function FilterPage({ employees, showModal, setShowModal}) {
             employee={selectedEmployee}
             showModal={selectedEmployee !== null}
             handleCloseModal={() => setSelectedEmployee(null)}
-            // handleCloseModal={() => setShowModal(false)}
             />
       </table>
 
