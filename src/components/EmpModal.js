@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import EditEmpModal from './EditEmpModal';
+
 
 
 
 const EmpModal = ({ employee, showModal, handleCloseModal }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
 
-
+  const handleEditModal = () => {
+    setShowEditModal(true);
+  };
 
   return (
+    <>
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
         <Modal.Title>Employee Information</Modal.Title>
@@ -39,11 +45,23 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
         <Button variant="secondary" onClick={handleCloseModal}>
           Close
         </Button>
-        {/* <Button variant="primary" onClick={handleEditEmployee}> Add onClick handler to edit */}
-          {/* Edit */}
-        {/* </Button> */}
+        <Button variant="primary" onClick={handleEditModal}>
+          Edit
+        </Button>
       </Modal.Footer>
     </Modal>
+
+            {showEditModal && (
+              <EditEmpModal
+                employee={employee}
+                showModal={showEditModal}
+                handleCloseModal={() => setShowEditModal(false)}
+              />
+            )
+            }
+  </>
+            
+            
   );
 };
 
