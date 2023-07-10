@@ -53,7 +53,6 @@ function FirstPage({ selectedDate }) {
   };
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////
   // handles the photo upload /////////////////////////////////////////////
 
@@ -248,13 +247,13 @@ const handleSupervisorChange = (selectedSupervisor) => {
       <input type="submit" value="Submit" />
       <br/>
     </form>
-    <FilterPage 
+    {/* <FilterPage 
     firstName={firstName}
     lastName={lastName}
     setFirstName={setFirstName}
     setLastName={setLastName}
     setSelectedTitle={setSelectedTitle}
-    />
+    /> */}
 
      </div>
   );
