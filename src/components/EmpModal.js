@@ -64,6 +64,7 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
             {/* Add more employee fields as needed */}
           </div>
         )}
+        <h5>Updated Information will show below this line</h5>
         {updatedEmployee && (
           <div>
             <p>Name: {updatedEmployee.first_name} {updatedEmployee.last_name}</p>

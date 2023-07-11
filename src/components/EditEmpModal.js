@@ -27,8 +27,7 @@ function EditEmpModal({ employee, showModal, handleCloseModal, handleRefreshEmpl
           console.log('Success:', data);
           handleCloseModal();
           handleRefreshEmployee();
-          // window.location.reload();
-          // navigate(`/employees/${employee.id}`);
+    
         })
         .catch((error) => {
           console.error('Error:', error);
