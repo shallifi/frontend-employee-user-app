@@ -16,6 +16,11 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
     setShowEditModal(true);
   };
 
+  const handleCloseModalAndReload = () => {
+    handleCloseModal();
+    window.location.reload();
+  };
+
   return (
     <>
     <Modal show={showModal} onHide={handleCloseModal}>
@@ -27,11 +32,7 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
         {employee && (
           <div>
             <p>Name: {employee.first_name} {employee.last_name}</p>
-            {/* <p>Last Name: {employee.last_name}</p> */}
-
-            {/* <input type="text" value={editedEmployee.first_name || employee.first_name}
-            onChange={(e) => setEditedEmployee({ ...editedEmployee, first_name: e.target.value })} /> */}
-           
+              
             <p>Title: {employee.title?.title_name || 'N/A'}</p>
             <p>Agency: {employee.agency?.agency_name || 'N/A'}</p>
             <p>Department: {employee.department?.department_name || 'N/A'}</p>
@@ -46,7 +47,7 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
         
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="secondary" onClick={handleCloseModalAndReload}>
           Close
         </Button>
         <Button variant="primary" onClick={handleEditModal}>
