@@ -62,7 +62,8 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         selectedOption={isSupervisor ? 'Yes' : 'No'}
        
         />
-        
+      
+       <br></br> 
 
     <h5>New to SCC/CBC project?</h5>
     <RadioGroup
@@ -72,6 +73,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         handleRadioChange={(event) => handleRadioChange(event, 'group1')}
         selectedOption={selectedOption['group1']}
     />
+    <br></br> 
     <h5>Question for SCC employees only - driving for position?</h5>
     <RadioGroup
         name="group2"
@@ -80,6 +82,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         handleRadioChange={(event) => handleRadioChange(event, 'group2')}
         selectedOption={selectedOption['group2']}
     />
+    <br></br> 
     <h5>Will employee be transporting children?</h5>
     <RadioGroup
         name="group3"
@@ -88,6 +91,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         handleRadioChange={(event) => handleRadioChange(event, 'group3')}
         selectedOption={selectedOption['group3']}
     />
+    <br></br> 
     <h5>Attending PreService?</h5>
     <RadioGroup
         name="group4"

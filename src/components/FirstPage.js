@@ -160,7 +160,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
  
      };
 
-    console.log('before fetch employeeData', employeeData);
+    // console.log('before fetch employeeData', employeeData);
   
 
    
@@ -185,7 +185,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
     setIsSupervisor(false);
     setAdditionalInfo('');
     setselectedNeeds([]); 
-    navigate('/second-page');
+    navigate('/filter-page');
   })
     .catch((error) => { console.error('Error:', error);
     });
@@ -245,6 +245,8 @@ const handleSupervisorChange = (selectedSupervisor) => {
     isSupervisor={isSupervisor} /> 
     <br/>
       <input type="submit" value="Submit" />
+      <br/>
+      <br/>
       <br/>
     </form>
     {/* <FilterPage 
