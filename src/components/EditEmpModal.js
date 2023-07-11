@@ -1,33 +1,38 @@
 import React from 'react'
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 function EditEmpModal({ employee, showModal, handleCloseModal}) {
 
     const [editedEmployee, setEditedEmployee] = useState({});
+    const navigate = useNavigate();
 
-    const handleEditEmployee = async () => {
-      try {
-        const response = await fetch(`/api/employees/${employee.id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(editedEmployee),
-        });
-        if (response.ok) {
-          handleCloseModal();
-        } else {
-          throw new Error('Something went wrong');
-        }
-      } catch (error) {
-        console.log('error updating emp', error);
-      }
+
+    const handleEditEmployee = (event) => {
+      event.preventDefault();
       console.log('handleEditEmp', editedEmployee);
-    };
-  
+      fetch(`http://localhost:3000/employees/${employee.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editedEmployee),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+          handleCloseModal();
+          // window.location.reload();
+          // navigate(`/employees/${employee.id}`);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
 
   return (
-    <div>
-        EditEmpModal
+    
        <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
             <Modal.Title>Edit Employee</Modal.Title>
@@ -38,10 +43,21 @@ function EditEmpModal({ employee, showModal, handleCloseModal}) {
             <div>
                 <p>Name: {employee.first_name} {employee.last_name}</p>
                 {/* <p>Last Name: {employee.last_name}</p> */}
-                <input type="text" value={editedEmployee.first_name || employee.first_name}
-                onChange={(e) => setEditedEmployee({ ...editedEmployee, first_name: e.target.value })} />
-                <input type="text" value={editedEmployee.last_name || employee.last_name}
-                onChange={(e) => setEditedEmployee({ ...editedEmployee, last_name: e.target.value })} />
+                <input 
+                type="text" 
+                value={editedEmployee.first_name || employee.first_name}
+                onChange={(e) => {
+                const value = e.target.value;
+                console.log('First name entry',value);
+                // setEditedEmployee({ ...editedEmployee, first_name: e.target.value })} />
+                setEditedEmployee({ ...editedEmployee, first_name: value })} }/>
+                
+                <input type="text" 
+                value={editedEmployee.last_name || employee.last_name}
+                onChange={(e) => {
+                const value = e.target.value;
+                
+                setEditedEmployee({ ...editedEmployee, last_name: e.target.value })} }/>
                 <p>Title: {employee.title?.title_name || 'N/A'}</p>
 
             </div>
@@ -56,11 +72,7 @@ function EditEmpModal({ employee, showModal, handleCloseModal}) {
             </Modal.Footer>
         </Modal.Body>
         </Modal>
-        
-
-
-
-        </div>
+             
   )
 }
 

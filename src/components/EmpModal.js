@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import EditEmpModal from './EditEmpModal';
+// import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
 
 const EmpModal = ({ employee, showModal, handleCloseModal }) => {
   const [showEditModal, setShowEditModal] = useState(false);
+
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const handleEditModal = () => {
     setShowEditModal(true);
@@ -56,6 +60,8 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
                 employee={employee}
                 showModal={showEditModal}
                 handleCloseModal={() => setShowEditModal(false)}
+                navigateBack={() => setShowEditModal(false)}
+                // navigateBack={() => navigate(location.state.from)}
               />
             )
             }
