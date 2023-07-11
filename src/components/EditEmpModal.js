@@ -4,10 +4,14 @@ import { Modal, Button } from 'react-bootstrap';
 // import { useNavigate } from 'react-router-dom';
 
 
-function EditEmpModal({ employee, showModal, handleCloseModal}) {
+function EditEmpModal({ employee, showModal, handleCloseModal, handleRefreshEmployee}) {
 
     const [editedEmployee, setEditedEmployee] = useState({});
     // const navigate = useNavigate();
+    // const reload = () => {
+    //   window.location.reload();
+    // }
+
 
 
     const handleEditEmployee = (event) => {
@@ -22,6 +26,7 @@ function EditEmpModal({ employee, showModal, handleCloseModal}) {
         .then((data) => {
           console.log('Success:', data);
           handleCloseModal();
+          handleRefreshEmployee();
           // window.location.reload();
           // navigate(`/employees/${employee.id}`);
         })
@@ -63,8 +68,8 @@ function EditEmpModal({ employee, showModal, handleCloseModal}) {
             </div>
             )}
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
-                Close
+                <Button variant="secondary" onClick={handleCloseModal} >
+                Close2
                 </Button>
                 <Button variant="primary" onClick={handleEditEmployee}>
                 Edit
