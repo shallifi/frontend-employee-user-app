@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(190, 245, 228);
 }
 
 .App-logo {
@@ -22,6 +23,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.label-for-names {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  padding-right: 5px;
 }
 
 .App-link {
@@ -65,6 +73,7 @@ td {
   color: white;
   height: 50px;
   font-size: 20px;
+  align-items: center;
 }
 
 

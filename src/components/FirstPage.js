@@ -199,13 +199,13 @@ const handleSupervisorChange = (selectedSupervisor) => {
     <form onSubmit={handleSubmit}>
       <h1>Employee Information</h1>
     
-    <label>
+    <label className='label-for-names'>
         First name:
         <input type="text"
         name="first_name"        
         onChange={handleNameChange} />
       </label>
-      <label>
+      <label className='label-for-names'>
         Last name:
         <input type="text" 
         name="last_name"        
