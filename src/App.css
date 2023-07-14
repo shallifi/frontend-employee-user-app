@@ -56,6 +56,17 @@ td {
   padding: 2px 4px;
 }
 
+.header-app {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #174e40;
+  color: white;
+  height: 50px;
+  font-size: 20px;
+}
+
 
 
 tfoot {

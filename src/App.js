@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
     
-      <p>Place holder for the beginning</p>
+      <header className='header-app'>New User Form</header>
     
       <Routes>
         <Route path="/" element={<FirstPage />} />
