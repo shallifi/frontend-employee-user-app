@@ -12,7 +12,8 @@ function CalendarWidget({ onDateChange}) {
 
   return (
     
-    <div>Start Date
+    <div>
+      <h5>Start Date</h5>
        
       <DatePicker
         selected={selectedDate}
@@ -23,6 +24,7 @@ function CalendarWidget({ onDateChange}) {
         isClearable // clear date need to fix formating
         showYearDropdown
         scrollableMonthYearDropdown
+        popperPlacement=''
       />
                       
     </div>

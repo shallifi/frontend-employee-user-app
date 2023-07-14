@@ -102,3 +102,9 @@ tfoot th {
 /* .hovered-row td {
   background-color: #eee3ee; 
 } */
+
+/* .react-datepicker_month-container {
+  z-index: 1000 !important;
+  display: flex;
+  align-items: center;
+} */
