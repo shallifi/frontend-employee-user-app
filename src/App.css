@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgb(190, 245, 228);
+  background-color: rgb(222, 241, 235);
 }
 
 .App-logo {
@@ -99,12 +99,19 @@ tfoot th {
   background-color: rgb(211, 211, 211); 
 }
 
-/* .hovered-row td {
-  background-color: #eee3ee; 
-} */
+/* Radio Button Group */
+.radio-group {
+  /* display: flex; */
+  /* flex-direction: row; */
+  justify-content: space-between;
+  /* align-items: center;  */
+  /* margin-right: 10px; */
+  font-size: 16px;
+  /* padding: auto; */
+  
+}
 
-/* .react-datepicker_month-container {
-  z-index: 1000 !important;
-  display: flex;
-  align-items: center;
-} */
+/* this is for the space between the button and name */
+input[type="radio"] {
+  margin-right: 5px;
+} 

@@ -49,10 +49,11 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
     ]; 
     
   return (
-    <div>ButtonGroupLabels
+    <div >
 
     <h5>Is employee going to be a Supervisor?</h5>
     <RadioGroup
+        // className="radio-group"
         name="group5"
         options={group5Options}
         inline
@@ -68,6 +69,7 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
     <h5>New to SCC/CBC project?</h5>
     <RadioGroup
         name="group1"
+        // className="radio-group"
         options={group1Options}
         inline
         handleRadioChange={(event) => handleRadioChange(event, 'group1')}

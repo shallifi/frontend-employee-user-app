@@ -6,7 +6,7 @@ import React from 'react';
 
 function RadioGroup({ name, options, handleRadioChange, selectedOption }) {
   return (
-    <div>
+    <div className='radio-group'>
       {options.map((option) => (
         <div key={option.id}>
           <input
