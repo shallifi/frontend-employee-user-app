@@ -200,14 +200,14 @@ const handleSupervisorChange = (selectedSupervisor) => {
       <h1>Employee Information</h1>
     
     <label className='label-for-names'>
-        First name:
-        <input type="text"
+        First name: 
+        <input className='input-for-names' type="text"
         name="first_name"        
         onChange={handleNameChange} />
       </label>
       <label className='label-for-names'>
         Last name:
-        <input type="text" 
+        <input className='input-for-names' type="text" 
         name="last_name"        
         onChange={handleNameChange} />
       </label>
