@@ -249,13 +249,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
       <br/>
       <br/>
     </form>
-    {/* <FilterPage 
-    firstName={firstName}
-    lastName={lastName}
-    setFirstName={setFirstName}
-    setLastName={setLastName}
-    setSelectedTitle={setSelectedTitle}
-    /> */}
+
 
      </div>
   );
