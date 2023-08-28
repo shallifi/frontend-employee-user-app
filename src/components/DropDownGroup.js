@@ -244,7 +244,7 @@ function DropDownGroup({onSelectedAgencyChange, onSelectedDepartmentChange, onSe
 
   return (
     <div>
-        <br></br>
+        <br/>
         <h5>Agency</h5>
     <AsyncSelect
         cacheOptions
