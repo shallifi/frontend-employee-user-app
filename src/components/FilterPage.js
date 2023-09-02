@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from "react-table";
-// import DefaultColFilter from './DefaultColFilter';
 import { useTable, useFilters, useSortBy} from 'react-table'
 import CustomFilter from './CustomFilter';
 import EmpModal from './EmpModal';
