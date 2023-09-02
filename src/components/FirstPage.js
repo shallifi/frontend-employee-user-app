@@ -226,6 +226,7 @@ const handleSupervisorChange = (selectedSupervisor) => {
       <br></br>
     <CalendarWidget onDateChange={handleCalendarChange} />
     <br></br>
+    {/* want to add this to an update */}
     {/* <BadgePhotoGroup 
       photo={badgePhoto} handleBadgePhotoChange={handleBadgePhotoChange}
     /> */}
