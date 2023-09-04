@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import EditEmpModal from './EditEmpModal';
-// import { useLocation, useNavigate } from 'react-router-dom';
+
 
 
 
@@ -10,8 +10,7 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [updatedEmployee, setUpdatedEmployee] = useState(employee);
 
-  // const navigate = useNavigate();
-  // const location = useLocation();
+
 
   const handleEditModal = () => {
     setShowEditModal(true);
@@ -22,14 +21,11 @@ const EmpModal = ({ employee, showModal, handleCloseModal }) => {
     window.location.reload();
   };
 
-  // const handleEditEmployee = (updatedEmployee) => {
-  //   console.log('handleEditEmp', updatedEmployee);
-  //   setUpdatedEmployee(updatedEmployee);
-  // };
+
 
   const handleRefreshEmployee = async (updatedEmployee) => {
     try {
-      console.log('handleEditEmp in EmpModal', updatedEmployee);
+      // console.log('handleEditEmp in EmpModal', updatedEmployee);
       setUpdatedEmployee(updatedEmployee);
 
       const response = await fetch(`http://localhost:3000/employees/${employee.id}`) 
