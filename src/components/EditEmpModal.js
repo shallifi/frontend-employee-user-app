@@ -1,16 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-// import { useNavigate } from 'react-router-dom';
+
 
 
 function EditEmpModal({ employee, showModal, handleCloseModal, handleRefreshEmployee}) {
 
     const [editedEmployee, setEditedEmployee] = useState({});
-    // const navigate = useNavigate();
-    // const reload = () => {
-    //   window.location.reload();
-    // }
 
 
 
@@ -46,20 +42,20 @@ function EditEmpModal({ employee, showModal, handleCloseModal, handleRefreshEmpl
             {employee && (
             <div>
                 <p>Name: {employee.first_name} {employee.last_name}</p>
-                {/* <p>Last Name: {employee.last_name}</p> */}
+          
                 <input 
                 type="text" 
                 value={editedEmployee.first_name || employee.first_name}
                 onChange={(e) => {
                 const value = e.target.value;
                 console.log('First name entry',value);
-                // setEditedEmployee({ ...editedEmployee, first_name: e.target.value })} />
+               
                 setEditedEmployee({ ...editedEmployee, first_name: value })} }/>
                 
                 <input type="text" 
                 value={editedEmployee.last_name || employee.last_name}
                 onChange={(e) => {
-                // const value = e.target.value;
+               
                 
                 setEditedEmployee({ ...editedEmployee, last_name: e.target.value })} }/>
                 <p>Title: {employee.title?.title_name || 'N/A'}</p>
