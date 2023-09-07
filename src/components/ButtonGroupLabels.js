@@ -17,10 +17,6 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         onSelectedOptionChange(event.target.value, groupName);       
         };
         
-// const handleSupervisorChange = (event) => {
-//     console.log('handleSupervisorChange', event.target.value);
-//     setIsSupervisor(event.target.value === 'Yes');};
-
 
     const group1Options = [
         { id: 'inline-radio-1', label: 'New' },
@@ -57,8 +53,6 @@ function ButtonGroupLabels({ onSelectedOptionChange, handleIsSupervisorRadioChan
         name="group5"
         options={group5Options}
         inline
-        // handleRadioChange={(event) => handleIsSupervisorRadioChange(event, 'group5')}
-        // selectedOption={selectedOption['group5'] === true ? 'Yes' : 'No' }    
         handleRadioChange={handleIsSupervisorRadioChange}
         selectedOption={isSupervisor ? 'Yes' : 'No'}
        
