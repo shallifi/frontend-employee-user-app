@@ -54,9 +54,6 @@ function BadgePhotoGroup({photo, handleBadgePhotoChange}) {
         )    
         }
 
-
-
-
     </div>
   )
 }
